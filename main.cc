@@ -9,23 +9,20 @@ using std::endl;
 
 int main()
 {
-    vector<int> v{1, 2, 3, 4, 5, 6, 7, 8, 9};
-    for(auto i : v)
-    {
-        i = i + 1;
+    vector<unsigned> scores(11, 0);
+    unsigned grade;
+    while(cin >> grade){
+        if(grade <= 100)
+        {
+            ++scores[grade/10];
+        } else {
+            cout << "The value is invalid" << endl;
+            break;
+        }
     };
-    for(auto i : v)
+    vector<int> ivec;
+    for (decltype(ivec.size()) ix = 0; ix != 10; ++ix)
     {
-        cout << i << endl;
+        ivec.push_back(ix);
     };
-    cout << "-----------------" << endl;
-    for(auto &i : v)
-    {
-        i *= i;
-    };
-    for(auto i : v)
-    {
-        cout << i << endl;
-    };
-    cout << "------------------" << endl;
 }
