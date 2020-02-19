@@ -1,11 +1,16 @@
 #include <vector>
+#include <string>
+#include <iostream>
 using std::vector;
+using std::string;
+using std::cin;
 
 int main()
 {
-    vector<int> v2;
-    for(int i = 0; i != 100; i++)
+    string word;
+    vector<string> text;
+    while (cin >> word)
     {
-        v2.push_back(i);
-    };
+        text.push_back(word);
+    }
 }
