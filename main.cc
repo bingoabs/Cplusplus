@@ -4,6 +4,8 @@
 using std::vector;
 using std::string;
 using std::cin;
+using std::cout;
+using std::endl;
 
 int main()
 {
@@ -12,5 +14,9 @@ int main()
     while (cin >> word)
     {
         text.push_back(word);
-    }
+    };
+    for(auto a : text)
+    {
+        cout << a << endl;
+    };
 }
