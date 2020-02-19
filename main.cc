@@ -10,22 +10,15 @@ using std::endl;
 
 int main()
 {
-    vector<string> text;
-    string word;
-    while (cin >> word)
+    string s("some string");
+    if(s.begin() == s.end())
     {
-        text.push_back(word);
+        auto it = s.begin();
+        *it = toupper(*it);
     };
-    cout << "Finish the input, print the upper word line by line" << endl;
-    for (auto &word : text)
+
+    for (auto it = s.begin(); it != s.end() && !isspace(*it); ++it)
     {
-        for(auto &c : word)
-        {
-            c = toupper(c);
-        }
+        *it = toupper(*it);
     }
-    for (auto word : text)
-    {
-        cout << word << endl;
-    };
 }
