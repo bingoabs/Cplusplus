@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <cctype>
 using std::vector;
 using std::string;
 using std::cin;
@@ -9,20 +10,22 @@ using std::endl;
 
 int main()
 {
-    vector<unsigned> scores(11, 0);
-    unsigned grade;
-    while(cin >> grade){
-        if(grade <= 100)
-        {
-            ++scores[grade/10];
-        } else {
-            cout << "The value is invalid" << endl;
-            break;
-        }
-    };
-    vector<int> ivec;
-    for (decltype(ivec.size()) ix = 0; ix != 10; ++ix)
+    vector<string> text;
+    string word;
+    while (cin >> word)
     {
-        ivec.push_back(ix);
+        text.push_back(word);
+    };
+    cout << "Finish the input, print the upper word line by line" << endl;
+    for (auto &word : text)
+    {
+        for(auto &c : word)
+        {
+            c = toupper(c);
+        }
+    }
+    for (auto word : text)
+    {
+        cout << word << endl;
     };
 }
