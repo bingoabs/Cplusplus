@@ -9,14 +9,23 @@ using std::endl;
 
 int main()
 {
-    string word;
-    vector<string> text;
-    while (cin >> word)
+    vector<int> v{1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for(auto i : v)
     {
-        text.push_back(word);
+        i = i + 1;
     };
-    for(auto a : text)
+    for(auto i : v)
     {
-        cout << a << endl;
+        cout << i << endl;
     };
+    cout << "-----------------" << endl;
+    for(auto &i : v)
+    {
+        i *= i;
+    };
+    for(auto i : v)
+    {
+        cout << i << endl;
+    };
+    cout << "------------------" << endl;
 }
