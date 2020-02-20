@@ -10,25 +10,13 @@ using std::endl;
 
 int main()
 {
-    string s("some string");
-    // upper the first letter in the string
-    if(s.begin() == s.end())
+    vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for(auto &n : nums)
     {
-        auto it = s.begin();
-        *it = toupper(*it);
+        n = n * 2;
     };
-    // upper the first word in the string
-    for (auto it = s.begin(); it != s.end() && !isspace(*it); ++it)
+    for(auto n : nums)
     {
-        *it = toupper(*it);
+        cout << n << endl;
     };
-    // (*it).empty() == it->empty
-    vector<string> text;
-    text.push_back("first word");
-    text.push_back(" ");
-    text.push_back("second word");
-    for(auto it = text.cbegin();
-    it != text.cend() && !it->empty(); ++it)
-        cout << *it << endl;
-    
 }
