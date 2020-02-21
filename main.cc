@@ -32,4 +32,13 @@ int main()
             ia[i][j] = i * colCnt + j;
         }
     }
+    // another way
+    size_t cnt = 0;
+    for(auto &row : ia)
+    {
+        for (auto &col : row)
+        {
+            col = cnt++;
+        };
+    };
 }
