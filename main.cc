@@ -10,19 +10,23 @@ using std::endl;
 
 int main()
 {
-    vector<int> sorted_nums = {0, 10, 20, 20, 30, 40, 50, 60, 70, 80, 90};
-    int sought = 10;
-    auto beg = sorted_nums.begin(), end = sorted_nums.end();
-    auto mid = sorted_nums.begin() + (end - beg)/2;
-    while(mid != end && *mid != sought)
-    {
-        if(sought < *mid)
-        {
-            end = mid;
-        } else {
-            beg = mid + 1;
-        };
-        mid = beg + (end - beg)/2;
-        cout << "one loop" << endl;
-    }
+    unsigned cnt = 42;
+    constexpr unsigned sz = 42;
+    //const unsigned sz = 100;
+    int arr[10];
+    int *parr[sz]; // right, as the `sz` is the constexpr
+    //string bad[cnt];  error, the cnt not const or constexpr
+    //string strs[get_size()]; error if the get_size() is not a constexpr
+
+    const unsigned sz = 3;
+    int ial[sz] = {0, 1, 2};
+    int a2[] = {0, 1, 2};
+    int a3[5] = {0, 1, 2}; // equals to a3[] = {0, 1, 2, 0, 0};
+    string a4[3] = {"hi", "bye"}; // equals to a4[] = {"hi", "bye", ""};
+
+    char a1[] = {'c', '+', '+'};
+    char a2[] = {'c', '+', '+', '\0'};
+    char a3[] = "c++"; // equals to a3[] = {'c', '+', '+', '\0'};
+    //const char a4[6] = "Daniel";
+    // error, as the char array need one more space to store the "Zero"
 }
