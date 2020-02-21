@@ -10,12 +10,16 @@ using std::endl;
 
 int main()
 {
-    const char ca[] = {'h', 'e', 'l', 'l', 'o'};
-    const char *cp = &ca[5];
-    cout << *cp << " end" << endl;
-    cout << *(cp + 1) << " end plus 1" << endl;
-    cout << "test" << endl;
+    // the size of array is 3, every element is a array who has 4 element.
+    int ia[3][4] = {
+        {0, 1, 2, 3},
+        {4, 5, 6, 7},
+        {8, 9, 10, 11}
+    };
+    // or
+    // int ia[3][4] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    int arr[10][20][30] = {0};// set all elements to 0!
 
-    int int_arr[] = {0, 1, 2, 3, 4, 5};
-    vector<int> ivec(begin(int_arr), end(int_arr));
+    ia[2][3] = arr[0][0][0];
+    int (&row)[4] = ia[1];// bind the `row` to a array which contains 4 int elements
 }
