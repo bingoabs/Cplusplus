@@ -11,11 +11,9 @@ using std::endl;
 // typedef int int_array[4]; old way to get an alias
 int main()
 {
-    //cond?(expr1):(expr2);
-    int grade;
-    cin >> grade;
-    string finalGrade = (grade < 60)?"failed":"success";
-    finalGrade = (grade > 90) ? "high pass"
-        : (grade < 60)? "failed" : "success";
-    cout << finalGrade << endl;
+    unsigned long u1 = 3, u2 = 7;
+    cout << (u1 & u2) << endl;
+    cout << (u1 | u2) << endl;
+    cout << (u1 && u2) << endl;
+    cout << (u1 || u2) << endl;
 }
