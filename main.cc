@@ -11,21 +11,30 @@ using std::endl;
 // typedef int int_array[4]; old way to get an alias
 int main()
 {
-    int ival = 42;
-    double dval = 3.14;
-    ival % 12;
-    //ival % dval; error
-    vector<string> text = {"test", "test"};
-    for(const auto &s : text){
-        cout << s;
-        if (s.empty() || s[s.size() - 1] == '.')
-            cout << endl;
-        else
-        {
-            cout << " ";
-        }
-    };
-    cout << endl;
     const char *cp = "Hello World";
-    // generate a char array?
+    // the cp can't change the value even without the 'const'
+    int num;
+    while(cin >> num)
+    {
+        if (num == 42)
+        {
+            cout << "Find 42, break;" << endl;
+        } else 
+        {
+            cout << "Input next num;" << endl;
+        }
+    }
+    // assign operator
+    int i = get_value();
+    while(i != 42)
+    {
+        // other codes
+        i = get_value();
+    }
+    // elegant way to write
+    int i;
+    while(i = get_value())
+    {
+        // other codes
+    };
 }
