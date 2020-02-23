@@ -11,19 +11,9 @@ using std::endl;
 // typedef int int_array[4]; old way to get an alias
 int main()
 {
-    int i; double d;
-    d = i = 3.5;
-    cout << d << " " << i << endl;
-    i = d = 3.5;
-    cout << d << " " << i << endl;
-    cout << endl;
-    double dval; int ival; int *pi;
-    dval = ival = 0;
-    pi = 0;
-
-    auto pbeg = v.begin();
-    while(pbeg != v.end() && *pbeg >= 0)
-    {
-        cout << *pbeg++ << endl;
-    };
+    string s1 = "a string", *p = &s1;
+    auto n = s1.size(); // directly run the `size` member
+    n = (*p).size(); // run `p` `size` member
+    n = p->size(); // equals to last one
+    // (ptr->name) == ((*ptr).name);
 }
