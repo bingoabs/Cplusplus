@@ -11,9 +11,10 @@ using std::endl;
 // typedef int int_array[4]; old way to get an alias
 int main()
 {
-    unsigned long u1 = 3, u2 = 7;
-    cout << (u1 & u2) << endl;
-    cout << (u1 | u2) << endl;
-    cout << (u1 && u2) << endl;
-    cout << (u1 || u2) << endl;
+    // int x[10]; int *p = x;
+    // cout << sizeof(x)/sizeof(*x) << endl;
+    // cout << sizeof(p)/sizeof(*p) << endl;
+    int x = 10, y = 20;
+    cout << (sizeof x + y) << endl;
+    cout << (sizeof x < y) << endl;
 }
