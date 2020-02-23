@@ -11,24 +11,11 @@ using std::endl;
 // typedef int int_array[4]; old way to get an alias
 int main()
 {
-    vector<int> vint = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-    auto iter = vint.begin();
-    cout << *iter++ << endl;
-    cout << *iter << endl;
-    cout << ++*iter << endl;
-    cout << (*iter)++ << " " << *iter << endl;
-    for(auto i : vint)
-    {
-        cout << i << " ";
-    };
-    cout << endl;
-    for(auto iter = vint.begin(); iter != vint.end(); ++iter)
-    {
-        ++*iter; // fetch the value in vector and increase
-    };
-    for(auto i : vint)
-    {
-        cout << i << " ";
-    };
-    cout << endl;
+    //cond?(expr1):(expr2);
+    int grade;
+    cin >> grade;
+    string finalGrade = (grade < 60)?"failed":"success";
+    finalGrade = (grade > 90) ? "high pass"
+        : (grade < 60)? "failed" : "success";
+    cout << finalGrade << endl;
 }
