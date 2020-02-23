@@ -11,9 +11,24 @@ using std::endl;
 // typedef int int_array[4]; old way to get an alias
 int main()
 {
-    string s1 = "a string", *p = &s1;
-    auto n = s1.size(); // directly run the `size` member
-    n = (*p).size(); // run `p` `size` member
-    n = p->size(); // equals to last one
-    // (ptr->name) == ((*ptr).name);
+    vector<int> vint = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    auto iter = vint.begin();
+    cout << *iter++ << endl;
+    cout << *iter << endl;
+    cout << ++*iter << endl;
+    cout << (*iter)++ << " " << *iter << endl;
+    for(auto i : vint)
+    {
+        cout << i << " ";
+    };
+    cout << endl;
+    for(auto iter = vint.begin(); iter != vint.end(); ++iter)
+    {
+        ++*iter; // fetch the value in vector and increase
+    };
+    for(auto i : vint)
+    {
+        cout << i << " ";
+    };
+    cout << endl;
 }
