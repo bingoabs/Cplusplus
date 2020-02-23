@@ -11,30 +11,19 @@ using std::endl;
 // typedef int int_array[4]; old way to get an alias
 int main()
 {
-    const char *cp = "Hello World";
-    // the cp can't change the value even without the 'const'
-    int num;
-    while(cin >> num)
+    int i; double d;
+    d = i = 3.5;
+    cout << d << " " << i << endl;
+    i = d = 3.5;
+    cout << d << " " << i << endl;
+    cout << endl;
+    double dval; int ival; int *pi;
+    dval = ival = 0;
+    pi = 0;
+
+    auto pbeg = v.begin();
+    while(pbeg != v.end() && *pbeg >= 0)
     {
-        if (num == 42)
-        {
-            cout << "Find 42, break;" << endl;
-        } else 
-        {
-            cout << "Input next num;" << endl;
-        }
-    }
-    // assign operator
-    int i = get_value();
-    while(i != 42)
-    {
-        // other codes
-        i = get_value();
-    }
-    // elegant way to write
-    int i;
-    while((i = get_value()) != 42)
-    {
-        // other codes
+        cout << *pbeg++ << endl;
     };
 }
