@@ -33,7 +33,7 @@ int main()
     }
     // elegant way to write
     int i;
-    while(i = get_value())
+    while((i = get_value()) != 42)
     {
         // other codes
     };
