@@ -11,23 +11,16 @@ using std::endl;
 // typedef int int_array[4]; old way to get an alias
 int main()
 {
-    const unsigned ival = 512, jval = 1024, kval = 4096;
-    unsigned bufsize;
-    unsigned swt;
-    cin >> swt;
-    switch (swt) {
-        case ival:
-            cout << "ival" << endl;
-            break;
-        case jval:
-            cout << "jval" << endl;
-            break;
-        case kval:
-            cout << "kval" << endl;
-            break;
-        default:
-            cout << "default" << endl;
-            break;
+    string input, last = "";
+    int cnt = 1;
+    while (cin >> input) {
+        if (input == last){
+            ++cnt;
+        }
+        else {
+            cout << "input:" << " '" << last << "'" << " " << cnt << " times" << endl;
+            last = input;
+            cnt = 1;
+        }
     }
-    cout << "end" << endl;
 }
