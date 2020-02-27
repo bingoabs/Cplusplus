@@ -74,10 +74,28 @@ int factorial(int val)
     return 1;
 }
 
+int &get(int *array, int index) { return array[index];}// equals to *(array + index)
+
+int list(vector<int> ivec, vector<int>::size_type size)
+{
+    if (size < ivec.size())
+    {   cout << ivec[size] << endl;
+        return list(ivec, size + 1);
+    }
+    else 
+        return 0;
+}
+
 int main(){
-    string s("a value");
-    cout << s << endl;
-    get_val(s, 0) = 'A';
-    cout << s << endl;
-    return 0;
+    // int ia[10]; // undefine, but still can get the reference!
+    // for(int i = 0; i != 10; ++i)
+    // {
+    //     cout << get(ia, i) << endl;
+    //     get(ia, i) = i;
+    //     cout << get(ia, i) << endl;
+    // }
+    // cout << ia << endl;
+    // cout << "here" << endl;
+    vector<int> ivec = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    list(ivec, 0);
 }
