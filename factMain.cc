@@ -9,19 +9,16 @@ using std::string;
 using std::initializer_list;
 using std::vector;
 
-// same function using different define
-string (&returnStrArray(vector<string> input))[2];
-auto returnStrArray1(vector<string> input) -> string (&)[2];
-string strArrayRaw[2] = {"first", "second"};
-string (&strArray)[2] = strArrayRaw;
-decltype(strArrayRaw) &returnStrArray2(vector<string> input);
-typedef string strArrayType[2]; // using strArrayType = string[2];
-strArrayType &returnStrArray3(vector<string> input);
+const string &shorterString(const string &s1, const string &s2){
+    return s1.size() <= s2.size() ? s1 : s2;
+}
 
-typedef int (*arrT)[1];
+string &shorterString(string &s1, string &s2){
+    auto &r = shorterString(const_cast<const string&)(s1),
+        const_cast<const string&>(s2));
+    return const_cast<string&>(r);
+}
 
 int main(){
-    int arr[1] = {100};
-    arrT list = {&arr};
-    decltype(list) b = &arr;
+    return 0;
 }
