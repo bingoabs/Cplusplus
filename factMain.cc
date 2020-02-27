@@ -9,9 +9,14 @@ using std::string;
 using std::initializer_list;
 using std::vector;
 
-typedef string::size_type sz;
+void f(){ cout << "f()" << endl;}
+void f(int a) {cout << "f(int a)" << endl;}
+void f(int a, int b) {cout << "f(int, int)" << endl;}
+void f(double a, double b = 3.14) {cout << "f(double, double = 3.14)" << endl;}
 
-string screen(sz ht = 24, sz wd = 80, char backgrnd = ' ');
 int main(){
-    return 0;
+    //f(2.56, 42);
+    f(42);
+    f(42, 0);
+    f(2.56, 3.14);
 }
