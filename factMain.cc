@@ -9,16 +9,9 @@ using std::string;
 using std::initializer_list;
 using std::vector;
 
-const string &shorterString(const string &s1, const string &s2){
-    return s1.size() <= s2.size() ? s1 : s2;
-}
+typedef string::size_type sz;
 
-string &shorterString(string &s1, string &s2){
-    auto &r = shorterString(const_cast<const string&)(s1),
-        const_cast<const string&>(s2));
-    return const_cast<string&>(r);
-}
-
+string screen(sz ht = 24, sz wd = 80, char backgrnd = ' ');
 int main(){
     return 0;
 }
