@@ -10,6 +10,8 @@ using std::initializer_list;
 using std::vector;
 
 class Sales_data {
+    friend std::istream &read(std::istream&, Sales_data&);
+    friend std::ostream &print(std::ostream&, const Sales_data&);
     public:
         Sales_data() = default;
         Sales_data(const string &s, unsigned n, double p):
@@ -18,12 +20,12 @@ class Sales_data {
         Sales_data(std::istream&);
         string isbn() const{return bookNo;}
         Sales_data &combine(const Sales_data&);
-        string bookNo;
-        unsigned units_sold = 0;
-        double revenue = 0.0;
     private:
         double avg_price() const
             {return units_sold? revenue/units_sold : 0;}
+        string bookNo;
+        unsigned units_sold = 0;
+        double revenue = 0.0;
 };
 
 std::istream &read(std::istream &is, Sales_data &item)
@@ -38,6 +40,7 @@ Sales_data::Sales_data(std::istream &is)
 {
     // even the `read` is called by the constructor in Sales_data,
     // but if the `read` uses the private memeber, the compilation would fail.
+    // And after declare the `read` is one of Sales_data's friends, it works.
     read(is, *this);
 }
 
