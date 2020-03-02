@@ -10,6 +10,7 @@ using std::initializer_list;
 using std::vector;
 
 class Sales_data {
+    friend Sales_data add(const Sales_data&, const Sales_data&);
     friend std::istream &read(std::istream&, Sales_data&);
     friend std::ostream &print(std::ostream&, const Sales_data&);
     public:
@@ -45,13 +46,18 @@ Sales_data::Sales_data(std::istream &is)
 }
 
 
-// std::ostream &print(std::ostream &os, const Sales_data &item)
-// {
-//     os << item.isbn() << " " << item.units_sold << " "
-//         << item.revenue << " " << item.ave_price();
-//     return os;
-// }
+std::ostream &print(std::ostream &os, const Sales_data &item)
+{
+    os << item.isbn() << " " << item.units_sold << " "
+        << item.revenue << " " << item.avg_price();
+    return os;
+}
 
+Sales_data add (const Sales_data &lhs, const Sales_data &rhs){
+    Sales_data sum = lhs;
+    sum.combine(rhs);
+    return sum;
+}
 
 
 int main(){
