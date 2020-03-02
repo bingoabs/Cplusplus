@@ -9,19 +9,33 @@ using std::string;
 using std::initializer_list;
 using std::vector;
 
-typedef int(*first)(int a, int b);
 
-int plus(int a, int b) { return a + b;}
-int sub(int a, int b){ return a - b;}
-int del(int a, int b){return a/b;}
-int mul(int a, int b){return a * b;}
+// Define the function member for Struct/Class
+// The `const` before `{` is used for `this`
+// double Sales_data::avg_price() const {
+//     if (units_sold)
+//         return revenue/units_sold;
+//     else
+//     {
+//         return 0;
+//     }
+// }
+
+struct People {
+    string name = "name";
+    string address;
+    string get_name() const;
+    string get_address() const;
+};// Notice must have the semicolon !!!
+
+string People::get_name() const {
+    return name;
+}
+string People::get_address() const {
+    return address;
+}
 
 int main(){
-    vector<first> b;
-    vector<int(*)(int, int)> a;
-    a.push_back(plus);
-    a.push_back(sub);
-    cout << a[0](10, 20) << endl;
-    cout << a[1](100, 50) << endl;
-    cout << "end" << endl;
+    People first;
+    cout << first.get_name() << endl;
 }
