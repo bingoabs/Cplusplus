@@ -3,6 +3,8 @@
 #include <iostream>
 
 class Screen {
+    // friend class Window_mgt; // Set the class to be a friend
+    // friend Window_mgr::clear(ScreenIndex); // Set the member of some class to be friend;
     public:
         typedef std::string::size_type pos;
         // using pos = std::string::size_type;
