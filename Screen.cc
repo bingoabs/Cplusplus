@@ -1,10 +1,6 @@
-#include <string>
+#include "Screen.h"
 
-class Screen {
-    public:
-        typedef std::string::size_type pos;
-    private:
-        pos cursor = 0;
-        pos height = 0, width = 0;
-        std::string contents;
+char Screen::get(pos r, pos c) const {
+    pos row = r * width;
+    return contents[row + c];
 }
