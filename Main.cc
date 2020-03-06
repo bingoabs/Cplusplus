@@ -5,27 +5,9 @@
 #include <iostream>
 
 int main(int argc, char *argv[]){
-    std::ifstream input(argv[1]);
-    std::string line;
-    while(getline(input, line))
-    {
-        for(char &c : line)
-        {
-            if(c != ' ')
-            {
-                std::cout << c;
-            } else {
-                std::cout << std::endl << "next word: " << std::endl;
-            }
-        }
-    }
-    // while(input >> c) // >> would ignore the space, \t etc..
-    // {
-    //     if(c != space)
-    //         std::cout << c;
-    //     else
-    //     {
-    //         std::cout << std::endl << "next word: " << std::endl;
-    //     }   
-    // }
+    std::ofstream out("file1");// implict using `out` model
+    std::ofstream out2("file1", std::ofstream::out);// implict `trunc` the file
+    std::ofstream out3("file1", std::ofstream::out | std::ofstream::trunc); // explict using `trunc`
+    std::ofstream app("file2", std::ofstream::app); // `append` implict using `out` model
+    std::ofstream app2("file2", std::ofstream::out | std::ofstream::app); // explicit using `out` and `app`
 }
