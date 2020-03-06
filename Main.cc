@@ -6,13 +6,26 @@
 
 int main(int argc, char *argv[]){
     std::ifstream input(argv[1]);
-    std::vector<std::string> strv;
     std::string line;
     while(getline(input, line))
-        strv.push_back(line);
-    for(auto line : strv){
-        std::cout << line << std::endl;
-        std::cout << "-----" << std::endl;
+    {
+        for(char &c : line)
+        {
+            if(c != ' ')
+            {
+                std::cout << c;
+            } else {
+                std::cout << std::endl << "next word: " << std::endl;
+            }
+        }
     }
-    std::cout << "end" << std::endl;
+    // while(input >> c) // >> would ignore the space, \t etc..
+    // {
+    //     if(c != space)
+    //         std::cout << c;
+    //     else
+    //     {
+    //         std::cout << std::endl << "next word: " << std::endl;
+    //     }   
+    // }
 }
