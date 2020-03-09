@@ -2,12 +2,22 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <iostream>
+#include <sstream>
+using std::cout;
+using std::endl;
+
 
 int main(int argc, char *argv[]){
-    std::ofstream out("file1");// implict using `out` model
-    std::ofstream out2("file1", std::ofstream::out);// implict `trunc` the file
-    std::ofstream out3("file1", std::ofstream::out | std::ofstream::trunc); // explict using `trunc`
-    std::ofstream app("file2", std::ofstream::app); // `append` implict using `out` model
-    std::ofstream app2("file2", std::ofstream::out | std::ofstream::app); // explicit using `out` and `app`
+    size_t v1 = 42;
+    auto f2 = [&v1] { return ++v1;};
+    v1 = 0;
+    auto j = f2();
+    cout << j << endl;
+    auto returnLambda = [](int i) -> int {
+        if (i > 0)
+            return -i;
+        else 
+            return i;
+    };
+    cout << returnLambda(10) << endl;
 }
