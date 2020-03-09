@@ -2,22 +2,25 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <functional>
+
 using std::cout;
 using std::endl;
 using std::count_if;
 using std::string;
 using std::vector;
+using std::bind;
+using std::placeholders::_1;
+// using namespace std::placeholders;
+// we can directly use the names in this namespace!
+
+bool check_size(const string &s, string::size_type sz)
+{
+    return s.size() >= sz;
+}
 
 int main(int argc, char *argv[]){
-    int li = 10;
-    auto f = [&li]() -> bool {
-        return li ? li-- : 0;
-    };
-    int index = 100;
-    while(index)
-    {
-        f();
-        cout << li << " " << index-- << endl;
-    }
-    cout << "end" << endl;
+    //string words[3] = {"a", "b", "c"};// built-in array has not the iterator!
+    vector<string> words = {"a", "b", "c", "d"}; 
+    auto wc = std::find_if(words.begin(), words.end(), bind(check_size, _1, 6));
 }
