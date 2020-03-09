@@ -21,6 +21,10 @@ bool check_size(const string &s, string::size_type sz)
 
 int main(int argc, char *argv[]){
     //string words[3] = {"a", "b", "c"};// built-in array has not the iterator!
-    vector<string> words = {"a", "b", "c", "d"}; 
-    auto wc = std::find_if(words.begin(), words.end(), bind(check_size, _1, 6));
+    vector<string> words = {"a", "ber", "c", "d"}; 
+    auto wc = std::find_if(words.begin(), words.end(), bind(check_size, _1, 2));
+    for(auto begin = wc; begin != words.end(); ++begin)
+    {
+        cout << *begin << endl;
+    }
 }
