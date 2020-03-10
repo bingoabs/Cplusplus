@@ -55,6 +55,7 @@ string replaceSubstring(string s, string oldVal, string newVal){
 }
 
 int main(int argc, char *argv[]){
+    //.\a.exe test t AAA
     string s(argv[1]);
     string oldVal(argv[2]);
     string newVal(argv[3]);
