@@ -15,8 +15,15 @@ using std::placeholders::_1;
 // using namespace std::placeholders;
 // we can directly use the names in this namespace!
 
+class Example {
+    public:
+        static double rate = 6.5;
+        static constexpr int vecSize = 20;
+        static vector<double> vec(10);
+};
 int main(int argc, char *argv[]){
-    vector<int> nums;
+    int vec = 10;
+    vector<int> nums(vec);
     vector<string> strings = {"1", "2", "3", "4"};
     for(string str : strings)
         nums.push_back(std::stoi(str));
