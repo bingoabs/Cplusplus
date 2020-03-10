@@ -6,6 +6,7 @@
 #include <array>
 #include <numeric>
 #include <list>
+#include <stack>
 using std::cout;
 using std::endl;
 using std::count_if;
@@ -14,38 +15,64 @@ using std::vector;
 using std::bind;
 using std::placeholders::_1;
 using std::list;
+using std::stack;
 // using namespace std::placeholders;
 // we can directly use the names in this namespace!
+bool isDigit(string s)
+{
+    if((s != "1")&&(s != "2")&&(s != "3")&&(s != "4")&&(s != "5")&&(s != "6"))
+        return false;
+    return true;
+}
+bool isSymbol(string s)
+{
+    if((s != "+") && (s != "-"))
+        return false;
+    return true;
+}
+string count(vector<string> vec){
+    int result = 0;
+    string last;
+    for(auto begin = vec.begin(); begin != vec.end(); begin++)
+    {
+        if(begin == vec.begin())
+        {
+            result = std::stoi(*begin);
+            continue;
+        }
+        if(*begin != "+")
 
+    }
+}
+
+string pop(stack<string> s)
+{
+    string temp = s.top();
+    s.pop();
+    return temp;
+}
+vector<string> popUntilRightBucket(stack<string> s)
+{
+    vector<string> temp;
+    while(s.top() != ")")
+        temp.push_back(pop(s));
+    return temp;
+}
 int main(int argc, char *argv[]){
-    int a[] = {1, 2, 3, 4, 5};
-    vector<int> vec(std::begin(a), std::end(a));
-    list<int> li(std::begin(a), std::end(a));
-    vector<int>::iterator iter = vec.begin();
-    while(iter != vec.end())
+    stack<string> left;
+    stack<string> right;
+    string leftTop;
+    string rightTop;
+    vector<string> data = {"3", "*", "(", "3", "+", "4", ")"};
+    for(string d : data)
+        left.push(d);
+    
+    while(true)
     {
-        if(!(*iter%2))
-            iter = vec.erase(iter);
-        else
-        {
-            iter++;
-        }
+        leftTop = pop(left);
+        if (leftTop == "(")
+            vector<string> expr = popUntilRightBucket(right);
+            string result = count(expr);
+
     }
-    list<int>::iterator liter = li.begin();
-    while(liter != li.end())
-    {
-        if(*liter%2)
-            liter = li.erase(liter);
-        else
-        {
-            liter++;
-        }
-        
-    }
-    for(auto a : vec)
-        cout << a << " ";
-    cout << endl;
-    for(auto b : li)
-        cout << b << " ";
-    cout << endl;
 }
