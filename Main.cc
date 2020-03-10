@@ -19,39 +19,28 @@ string replaceSubstring(string s, string oldVal, string newVal){
         cout << s.size() << " " << oldVal.size();
         return string("");
     }
-    bool inSub = false;
-    vector<int> startIndex;
-    // collect all the index of `s` which store the first element in `oldVal`
-    for(int index = 0; index < s.size(); ++index)
+    string::iterator begin = s.begin();
+    while((begin + oldVal.size()) <= s.end())
     {
-        if (s[index] == oldVal[0])
-            startIndex.push_back(index);
-    }
-    vector<int> realSubIndex;
-    while(startIndex.size() > 0)
-    {
-        if((s.size() - startIndex.back() + 1) < (oldVal.size()))
+        string::iterator rawBegin = begin;
+        string::iterator ob = oldVal.begin();
+        for(;ob != oldVal.end(); ob++, begin++)
         {
+            if(*begin != *ob)
+                break;
+        }
+        if(ob != oldVal.end())
+        {
+            // don't match the oldVal
+            if(ob == oldVal.begin())
+                begin++;
             continue;
         }
-        bool isSub = true;
-        for(int startS = startIndex.back(), startOld = 0;
-            startOld < oldVal.size(); // oldVal is the limit
-            ++startS, ++startOld)
-        {
-            if (s[startS] != oldVal[startOld])
-                isSub = false;
-        }
-        if(isSub)
-            realSubIndex.push_back(startIndex.back());
-        startIndex.pop_back();
-    }
-    for(int index : realSubIndex)
-    {
-        s.replace(index, oldVal.size(), newVal);
+        string::iterator iter = s.erase(rawBegin, rawBegin + oldVal.size());
+        iter = s.insert(iter, newVal.begin(), newVal.end());
+        begin = iter + newVal.size();
     }
     return s;
-
 }
 
 int main(int argc, char *argv[]){
