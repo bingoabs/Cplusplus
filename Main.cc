@@ -31,31 +31,36 @@ bool isSymbol(string s)
     return true;
 }
 string count(vector<string> vec){
-    int result = 0;
-    string last;
-    for(auto begin = vec.begin(); begin != vec.end(); begin++)
+    while(vec.size() > 1)
     {
-        if(begin == vec.begin())
-        {
-            result = std::stoi(*begin);
-            continue;
-        }
-        if(*begin != "+")
-
+        int first = std::stoi(vec.back());
+        vec.pop_back();
+        string oper = vec.back();
+        vec.pop_back();
+        int second = std::stoi(vec.back());
+        vec.pop_back();
+        int temp;
+        if(oper == "+")
+            temp = first + second;
+        else if (oper == "*")
+            temp = first * second;
+        vec.push_back(std::to_string(temp));
     }
+    return vec.back();
 }
 
-string pop(stack<string> s)
+string pop(stack<string> &s)
 {
     string temp = s.top();
     s.pop();
     return temp;
 }
-vector<string> popUntilRightBucket(stack<string> s)
+vector<string> popUntilRightBucket(stack<string> &s)
 {
     vector<string> temp;
     while(s.top() != ")")
         temp.push_back(pop(s));
+    pop(s);
     return temp;
 }
 int main(int argc, char *argv[]){
@@ -67,12 +72,32 @@ int main(int argc, char *argv[]){
     for(string d : data)
         left.push(d);
     
-    while(true)
+    while (true)
     {
-        leftTop = pop(left);
-        if (leftTop == "(")
-            vector<string> expr = popUntilRightBucket(right);
-            string result = count(expr);
-
+        if((left.size() == 1) && (right.size() == 0))
+        {
+            break;
+        } else if (left.size() == 0)
+        {
+            vector<string> epr;
+            while(right.size())
+                epr.push_back(pop(right));
+            string result = count(epr);
+            left.push(result);
+        } else
+        {
+            leftTop = pop(left);
+            if (leftTop == "(")
+            {
+                vector<string> epr = popUntilRightBucket(right);
+                string result = count(epr);
+                left.push(result);
+                while(right.size() > 0)
+                    left.push(pop(right));
+            } else {
+                right.push(leftTop);
+            }
+        }
     }
+    cout << pop(left) << " result " << endl;
 }
