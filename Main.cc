@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
         cout << a << " ";
     cout << endl;
     list<int> u_nums;
-    std::unique_copy(nums.begin(), nums.end(), u_nums.begin());
+    std::unique_copy(nums.begin(), nums.end(), std::back_inserter(u_nums));
     cout << u_nums.size() << endl;
     for(int a : u_nums)
         cout << a << " ";
