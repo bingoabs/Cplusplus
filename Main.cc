@@ -24,17 +24,17 @@ using std::stack;
 int main(int argc, char *argv[]){
     std::istream_iterator<int> in(cin);
     std::istream_iterator<int> in_eof;
-    vector<int> nums;
-    while(in != in_eof)
-        nums.push_back(*in++);
-    std::stable_sort(nums.begin(), nums.end(), [](int a, int b) { return a > b;});
-    for(int a : nums)
-        cout << a << " ";
+    // It looks like one istream_iterator can't reuse
+    // vector<int> vn(in, in_eof);
+    // for(auto v : vn)
+    //     cout << v << " ";
+    // cout << endl;
+    vector<int> vn2(10, 1);
+    auto end = std::copy(in, in_eof, vn2.begin());
+    
+    for(auto v : vn2)
+        cout << v << " ";
     cout << endl;
-    list<int> u_nums;
-    std::unique_copy(nums.begin(), nums.end(), std::back_inserter(u_nums));
-    cout << u_nums.size() << endl;
-    for(int a : u_nums)
-        cout << a << " ";
-    cout << endl;
+    cout << *end << endl;
+    cout << (vn2.begin() - end) << endl;
 } 
