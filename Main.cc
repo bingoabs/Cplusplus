@@ -22,10 +22,19 @@ using std::list;
 using std::stack;
 
 int main(int argc, char *argv[]){
-    std::ifstream f("fact.cc");
-    std::istream_iterator<string> in(f);
-    std::istream_iterator<string> in_eof;
+    std::istream_iterator<int> in(cin);
+    std::istream_iterator<int> in_eof;
+    vector<int> nums;
     while(in != in_eof)
-        cout << *in++ << endl;
+        nums.push_back(*in++);
+    std::stable_sort(nums.begin(), nums.end(), [](int a, int b) { return a > b;});
+    for(int a : nums)
+        cout << a << " ";
+    cout << endl;
+    list<int> u_nums;
+    std::unique_copy(nums.begin(), nums.end(), u_nums.begin());
+    cout << u_nums.size() << endl;
+    for(int a : u_nums)
+        cout << a << " ";
     cout << endl;
 } 
