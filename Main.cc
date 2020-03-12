@@ -7,6 +7,7 @@
 #include <numeric>
 #include <list>
 #include <stack>
+using std::cin;
 using std::cout;
 using std::endl;
 using std::count_if;
@@ -20,15 +21,16 @@ using std::stack;
 // we can directly use the names in this namespace!
 
 int main(int argc, char *argv[]){
-    cout << argv[0] << " " << argv[1] << " " << argv[2] << endl;
-    const char *a = argv[1];
-    const char *b = argv[2];
-    vector<const char*> va = {a};
-    vector<const char*> vb = {b};
-    cout << std::equal(va.begin(), va.end(), vb.begin()) << endl;
-    string s = argv[1];
-    string d = argv[2];
-    vector<string> vs = {s};
-    vector<string> vd = {d};
-    cout << std::equal(vs.begin(), vs.end(), vd.begin()) << endl;
+    vector<int> vec;
+    vec = {1, 1, 1, 1, 1};
+    list<int> lst;
+    int i;
+    while(cin >> i)
+        lst.push_back(i);
+    for(auto c : lst)
+        cout << c << " " << endl;
+    std::copy(lst.cbegin(), lst.cend(), vec.begin());
+    for(auto c : vec)
+        cout << c << endl;
+    cout << "end" << endl;
 }
