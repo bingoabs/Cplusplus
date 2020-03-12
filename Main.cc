@@ -9,6 +9,7 @@
 #include <list>
 #include <stack>
 #include <iterator> // for the istream_iterator
+#include <forward_list>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -20,13 +21,22 @@ using std::placeholders::_1;
 using std::placeholders::_2;
 using std::list;
 using std::stack;
+using std::forward_list;
 
 int main(int argc, char *argv[]){
-    string raw = "this is the test";
-    char o = 'i';
-    char n = 'I';
-    string r;
-    std::replace_copy_if(raw.begin(), raw.end(), std::back_inserter(r), [](char a){return a == 't';}, 'T');
-    for(char a : r)
-        cout << a << endl;
+    // list<int> nums = {11, 11, 11};
+    // list<int> ln = {1, 2, 3, 4, 5};
+    // ln.splice(ln.begin(), nums);
+    // for(auto n : ln)
+    //     cout << n << endl;
+
+    forward_list<int> nums = {11, 12, 13};
+    forward_list<int> fn = {7, 8, 9, 10};
+    forward_list<int>::iterator begin = nums.begin();
+    begin++;
+    begin++;
+    begin++;
+    fn.splice_after(fn.before_begin(), nums, nums.begin(), begin);
+    for(auto n : fn)
+        cout << n << endl;
 } 
