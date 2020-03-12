@@ -21,16 +21,12 @@ using std::stack;
 // we can directly use the names in this namespace!
 
 int main(int argc, char *argv[]){
-    vector<int> vec;
-    vec = {1, 1, 1, 1, 1};
-    list<int> lst;
-    int i;
-    while(cin >> i)
-        lst.push_back(i);
-    for(auto c : lst)
-        cout << c << " " << endl;
-    std::copy(lst.cbegin(), lst.cend(), vec.begin());
-    for(auto c : vec)
-        cout << c << endl;
+    vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    //vec.reserve(10);
+    // fill_n and copy requires the target array to 
+    // have enough space to store the data
+    fill_n(vec.begin(), 10, 0);
+    for(auto a : vec)
+        cout << a << " ";
     cout << "end" << endl;
 }
