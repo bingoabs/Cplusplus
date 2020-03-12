@@ -20,8 +20,15 @@ using std::stack;
 // we can directly use the names in this namespace!
 
 int main(int argc, char *argv[]){
-    const char *a = "test";
-    const char *b = "test1";
-    for(int index = 0; *a != '\0'; ++index, ++a)
-        cout << index << " " << *a << endl;
+    cout << argv[0] << " " << argv[1] << " " << argv[2] << endl;
+    const char *a = argv[1];
+    const char *b = argv[2];
+    vector<const char*> va = {a};
+    vector<const char*> vb = {b};
+    cout << std::equal(va.begin(), va.end(), vb.begin()) << endl;
+    string s = argv[1];
+    string d = argv[2];
+    vector<string> vs = {s};
+    vector<string> vd = {d};
+    cout << std::equal(vs.begin(), vs.end(), vd.begin()) << endl;
 }
