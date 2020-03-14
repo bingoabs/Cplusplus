@@ -11,6 +11,7 @@
 #include <iterator> // for the istream_iterator
 #include <forward_list>
 #include <map>
+#include <utility>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -25,11 +26,7 @@ using std::stack;
 using std::forward_list;
 
 int main(int argc, char *argv[]){
-    std::map<vector<int>::iterator, int> wordsLineNum;
-    vector<int> a = {1, 2, 3, 4, 5};
-    vector<int> b = {1, 2, 3, 4, 5};
-    wordsLineNum = {
-        {a.begin(), 10},
-        {b.begin(), 10}
-    };
+    std::pair<string, string> author{"James", "Joyce"};
+    cout << author.first << " is James: " << ((author.second == "Jo") ? " True" : " False");
+    cout << endl;
 } 
