@@ -10,6 +10,7 @@
 #include <stack>
 #include <iterator> // for the istream_iterator
 #include <forward_list>
+#include <map>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -24,19 +25,11 @@ using std::stack;
 using std::forward_list;
 
 int main(int argc, char *argv[]){
-    // list<int> nums = {11, 11, 11};
-    // list<int> ln = {1, 2, 3, 4, 5};
-    // ln.splice(ln.begin(), nums);
-    // for(auto n : ln)
-    //     cout << n << endl;
-
-    forward_list<int> nums = {11, 12, 13};
-    forward_list<int> fn = {7, 8, 9, 10};
-    forward_list<int>::iterator begin = nums.begin();
-    begin++;
-    begin++;
-    begin++;
-    fn.splice_after(fn.before_begin(), nums, nums.begin(), begin);
-    for(auto n : fn)
-        cout << n << endl;
+    std::map<vector<int>::iterator, int> wordsLineNum;
+    vector<int> a = {1, 2, 3, 4, 5};
+    vector<int> b = {1, 2, 3, 4, 5};
+    wordsLineNum = {
+        {a.begin(), 10},
+        {b.begin(), 10}
+    };
 } 
