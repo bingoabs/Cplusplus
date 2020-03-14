@@ -25,8 +25,30 @@ using std::list;
 using std::stack;
 using std::forward_list;
 
-int main(int argc, char *argv[]){
-    std::pair<string, string> author{"James", "Joyce"};
-    cout << author.first << " is James: " << ((author.second == "Jo") ? " True" : " False");
-    cout << endl;
+std::pair<string, int> process(vector<string> &v)
+{
+    if(!v.empty())
+    // return std::pair<string, int>(v.back(), v.back().size()); // before c++11
+    //or
+    //make_pair(v.back(), v.back().size());
+        return {v.back(), v.back().size()};
+    else 
+        return std::pair<string, int>();
+}
+int main(int argc, char *argv[])
+{
+    vector<string> names = {"Joe", "Libby", "Qiu"};
+    vector<int> nums = {100, 100, 101};
+    vector<std::pair<string, int>> result;
+    auto bn = names.begin();
+    auto be = names.end();
+    auto bnum = nums.begin();
+    while(bn != be)
+    {
+        result.push_back({*bn, *bnum});
+        bn++;
+        bnum++;
+    }
+    for(auto e : result)
+        cout << e.first << " " << e.second << endl;
 } 
