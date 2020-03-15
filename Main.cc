@@ -51,4 +51,11 @@ int main(int argc, char *argv[])
     }
     for(auto e : result)
         cout << e.first << " " << e.second << endl;
+    std::map<string, size_t> word_cout;
+    auto map_it = word_cout.begin();
+    // *map_id is a reference to pair<const string, size_t>;
+    cout << map_it->first;
+    cout << " " << map_it->second;
+    //map_it->first = "new key"; // raise error, as the key is const
+    ++map_it->second;
 } 
