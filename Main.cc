@@ -11,6 +11,7 @@
 #include <iterator> // for the istream_iterator
 #include <forward_list>
 #include <map>
+#include <set>
 #include <utility>
 using std::cin;
 using std::cout;
@@ -24,38 +25,31 @@ using std::placeholders::_2;
 using std::list;
 using std::stack;
 using std::forward_list;
+using std::map;
+using std::set;
+using std::multiset;
 
-std::pair<string, int> process(vector<string> &v)
-{
-    if(!v.empty())
-    // return std::pair<string, int>(v.back(), v.back().size()); // before c++11
-    //or
-    //make_pair(v.back(), v.back().size());
-        return {v.back(), v.back().size()};
-    else 
-        return std::pair<string, int>();
-}
 int main(int argc, char *argv[])
 {
-    vector<string> names = {"Joe", "Libby", "Qiu"};
-    vector<int> nums = {100, 100, 101};
-    vector<std::pair<string, int>> result;
-    auto bn = names.begin();
-    auto be = names.end();
-    auto bnum = nums.begin();
-    while(bn != be)
+    multiset<string> c = {"a", "b", "c"};
+    vector<string> v = {"d", "e", "f"};
+    // std::copy(v.begin(), v.end(), std::inserter(c, c.end()));
+    // std::copy(v.begin(), v.end(), std::back_inserter(c)); // only this one failed
+    // std::copy(c.begin(), c.end(), std::inserter(v, v.end()));
+    std::copy(c.begin(), c.end(), std::back_inserter(v));
+    multiset<string>::iterator cb = c.begin();
+    while(cb != c.end())
     {
-        result.push_back({*bn, *bnum});
-        bn++;
-        bnum++;
+        cout << *cb << " ";
+        cb++;
     }
-    for(auto e : result)
-        cout << e.first << " " << e.second << endl;
-    std::map<string, size_t> word_cout;
-    auto map_it = word_cout.begin();
-    // *map_id is a reference to pair<const string, size_t>;
-    cout << map_it->first;
-    cout << " " << map_it->second;
-    //map_it->first = "new key"; // raise error, as the key is const
-    ++map_it->second;
+    cout << endl;
+    for(auto a : v)
+        cout << a << " ";
+    cout << endl;
+    set<int> iset = {0, 1, 2, 3, 4, 5, 6};
+    iset.find(1); // return a set<int>::iterator reference to the key == 1 element
+    iset.find(11); // return a set<int>::iterator reference to the one after tail
+    iset.count(1); // return 1;
+    iset.count(11); // return 0;
 } 
