@@ -30,12 +30,13 @@ using std::map;
 using std::set;
 using std::multiset;
 
-void recv(std::shared_ptr<vector<int>> p)
+std::shared_ptr<vector<int>> recv(std::shared_ptr<vector<int>> p)
 {
     cout << "2.recv: " << p.use_count() << endl;
     int input;
     while(cin >> input)
         p->push_back(input);
+    return p;
 }
  
 void print(std::shared_ptr<vector<int>> p)
