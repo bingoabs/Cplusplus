@@ -29,8 +29,25 @@ using std::map;
 using std::set;
 using std::multiset;
 
+vector<int> *recv(vector<int> *p)
+{
+    int input;
+    while(cin >> input)
+        p->push_back(input);
+    return p;
+}
+
+void print(vector<int> *p)
+{
+    vector<int> a = *p;
+    for(int e : a)
+        cout << e << " ";
+    cout << endl;
+}
+
 int main(int argc, char *argv[])
 {
-    const int *pci = new const int(1024);
-    delete pci;
+    vector<int> *iv = new vector<int>;
+    iv = recv(iv);
+    print(iv);
 } 
