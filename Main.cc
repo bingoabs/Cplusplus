@@ -30,29 +30,12 @@ using std::map;
 using std::set;
 using std::multiset;
 
-std::shared_ptr<vector<int>> recv(std::shared_ptr<vector<int>> p)
-{
-    cout << "2.recv: " << p.use_count() << endl;
-    int input;
-    while(cin >> input)
-        p->push_back(input);
-    return p;
-}
- 
-void print(std::shared_ptr<vector<int>> p)
-{
-    vector<int> a = *p;
-    for(int e : a)
-        cout << e << " ";
-    cout << endl;
-}
 
 int main(int argc, char *argv[])
 {
-    std::shared_ptr<vector<int>> a = std::make_shared<vector<int>>();
-    cout << "1: " << a.use_count() << endl;
-    recv(a);
-    cout << "2: " << a.use_count() << endl;
-    print(a);
-    cout << "3: " << a.use_count() << endl;
+    std::shared_ptr<int> p(new int(1));
+    if(!p.unique())
+        p.reset(new int(10));
+    *p += 100;
+    cout << *p << endl;
 } 
