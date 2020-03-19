@@ -13,6 +13,7 @@
 #include <map>
 #include <set>
 #include <utility>
+#include <memory>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -29,14 +30,15 @@ using std::map;
 using std::set;
 using std::multiset;
 
-void recv(vector<int> *p)
+std::shared_ptr<vector<int>> recv(std::shared_ptr<vector<int>> p)
 {
     int input;
     while(cin >> input)
         p->push_back(input);
+    return p;
 }
  
-void print(vector<int> *p)
+void print(std::shared_ptr<vector<int>> p)
 {
     vector<int> a = *p;
     for(int e : a)
@@ -46,8 +48,7 @@ void print(vector<int> *p)
 
 int main(int argc, char *argv[])
 {
-    vector<int> *iv = new vector<int>;
-    recv(iv);
-    print(iv);
-    delete iv;
+    std::shared_ptr<vector<int>> a = std::make_shared<vector<int>>();
+    a = recv(a);
+    print(a);
 } 
