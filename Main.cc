@@ -29,13 +29,16 @@ using std::forward_list;
 using std::map;
 using std::set;
 using std::multiset;
+using std::shared_ptr;
 
+void process(shared_ptr<int> p)
+{
+    cout << "p use_count: " << p.use_count() << endl;
+}
 
 int main(int argc, char *argv[])
 {
-    std::shared_ptr<int> p(new int(1));
-    if(!p.unique())
-        p.reset(new int(10));
-    *p += 100;
-    cout << *p << endl;
+    shared_ptr<int> p(new int(31));
+    process(shared_ptr<int>(p));
+    cout << "end count: " << p.use_count() << endl;
 } 
