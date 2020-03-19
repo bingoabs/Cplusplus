@@ -29,14 +29,13 @@ using std::map;
 using std::set;
 using std::multiset;
 
-vector<int> *recv(vector<int> *p)
+void recv(vector<int> *p)
 {
     int input;
     while(cin >> input)
         p->push_back(input);
-    return p;
 }
-
+ 
 void print(vector<int> *p)
 {
     vector<int> a = *p;
@@ -48,6 +47,7 @@ void print(vector<int> *p)
 int main(int argc, char *argv[])
 {
     vector<int> *iv = new vector<int>;
-    iv = recv(iv);
+    recv(iv);
     print(iv);
+    delete iv;
 } 
