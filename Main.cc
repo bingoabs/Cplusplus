@@ -39,6 +39,6 @@ void process(shared_ptr<int> p)
 int main(int argc, char *argv[])
 {
     shared_ptr<int> p(new int(31));
-    process(shared_ptr<int>(p));
+    process(shared_ptr<int>(p.get()));
     cout << "end count: " << p.use_count() << endl;
 } 
