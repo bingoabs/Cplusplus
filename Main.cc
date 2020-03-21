@@ -37,6 +37,9 @@ using std::unique_ptr;
 int main(int argc, char *argv[])
 {
     unique_ptr<int> a(new int(10));
+    // int c = 100;
+    // int *aa = &c;
+    // unique_ptr<int> a1(aa);
     unique_ptr<int> a1;
     // a1 = a; raise error
     a1.reset(a.release());
