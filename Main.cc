@@ -30,15 +30,14 @@ using std::map;
 using std::set;
 using std::multiset;
 using std::shared_ptr;
+using std::unique_ptr;
 
-void process(shared_ptr<int> p)
-{
-    cout << "p use_count: " << p.use_count() << endl;
-}
+
 
 int main(int argc, char *argv[])
 {
-    shared_ptr<int> p(new int(31));
-    process(shared_ptr<int>(p.get()));
-    cout << "end count: " << p.use_count() << endl;
+    unique_ptr<int> a(new int(10));
+    unique_ptr<int> a1;
+    // a1 = a; raise error
+    a1.reset(a.release());
 } 
