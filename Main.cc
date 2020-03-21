@@ -36,16 +36,30 @@ using std::unique_ptr;
 
 int main(int argc, char *argv[])
 {
-    string a = "test";
-    string b = "test";
-    size_t len = a.size() + b.size();
-    char *str = new char[len];
-    size_t index = 0;
-    for(auto e : a)
-        str[index++] = e;
-    for(auto e : b)
-        str[index++] = e;
-    cout << "index: " << index << endl;
-    for(auto a = 0; a < len; a++)
-        cout << str[a] << " ";
+    size_t max = 2;
+    char *storage = new char[max];
+    size_t curr = 0;
+    string input;
+    while(std::getline(cin, input))
+    {
+        for(auto e : input)
+        {
+            if (curr < max)
+                storage[curr++] = e;
+            else
+            {
+                cout << "extend the array" << endl;
+                char *temp = storage;
+                size_t oldMax = max;
+                max *= 2;
+                storage = new char[max];
+                for(size_t a = 0; a < oldMax; a++)
+                    storage[a] = temp[a];
+                storage[curr++] = e;
+            }
+            
+        }
+    }
+    for(size_t a = 0; a < curr; a++)
+        cout << storage[a] << " ";
 } 
