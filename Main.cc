@@ -36,11 +36,12 @@ using std::unique_ptr;
 
 int main(int argc, char *argv[])
 {
-    unique_ptr<int> a(new int(10));
-    // int c = 100;
-    // int *aa = &c;
-    // unique_ptr<int> a1(aa);
-    unique_ptr<int> a1;
-    // a1 = a; raise error
-    a1.reset(a.release());
+    int *pia = new int[10];
+    int *pia2 = new int[10]();
+    string *psa = new string[10];
+    string *psa2 = new string[10]();
+    int *pia3 = new int[10]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *a = new int(100);
+    delete a;
+    delete [] pia;
 } 
