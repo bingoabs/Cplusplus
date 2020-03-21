@@ -36,12 +36,14 @@ using std::unique_ptr;
 
 int main(int argc, char *argv[])
 {
-    int *pia = new int[10];
-    int *pia2 = new int[10]();
-    string *psa = new string[10];
-    string *psa2 = new string[10]();
-    int *pia3 = new int[10]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    int *a = new int(100);
-    delete a;
-    delete [] pia;
+    unique_ptr<int[]> up(new int[10]);
+    for(size_t i = 0; i != 10; ++i)
+        up[i] = i;
+    up.release(); // using delete [] destroy the bottom ptr
+    shared_ptr<int> sp(new int[10], [](int *p){delete [] p;});
+    // shared_ptr doesn't directly support the `new array`
+    // instead we need define the `self-define deleter`
+    for(size_t i = 0; i != 10; ++i)
+        *(sp.get() + i) = i;
+    sp.reset();
 } 
