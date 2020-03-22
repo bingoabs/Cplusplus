@@ -36,24 +36,9 @@ using std::allocator;
 
 int main(int argc, char *argv[])
 {
-    size_t n = 100;
-    // string *const p = new string[n];
-    // string s;
-    // string *q = p;
-    // while(cin >> s && q != p + n)
-    //     *q++ = s;
-    // const size_t size = q - p;
-    // delete [] p;
-    allocator<string> alloc;
-    // auto const p = alloc.allocate(n);
-    string *const p = alloc.allocate(n); //string const *p = alloc.allocate(n); is error expression
-    auto q = p;
-    alloc.construct(q++);
-    alloc.construct(q++, 10, 'c');
-    alloc.construct(q++, "hi");
-    cout << *p << endl;
-    cout << *q << endl;
-    while(q != p)
-        alloc.destroy(--q);
-    alloc.deallocate(p, n);
+    vector<int> inputs{1, 2, 3, 4, 5, 6};
+    allocator<int> alloc;
+    auto p = alloc.allocate(inputs.size() * 2);
+    auto q = std::uninitialized_copy(inputs.begin(), inputs.end(), p);
+    std::uninitialized_fill_n(q, inputs.size(), 42);
 } 
