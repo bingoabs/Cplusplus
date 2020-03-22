@@ -49,7 +49,14 @@ Sales_data::Sales_data(const Sales_data &orid):
     units_sold(orid.units_sold),
     revenue(orid.revenue)
     { }
-
+Sales_data&
+Sales_data::operator=(const Sales_data &rhs)
+{
+    bookNo = rhs.bookNo;
+    units_sold = rhs.units_sold;
+    revenue = rhs.revenue;
+    return *this;
+}
 int main(int argc, char *argv[])
 {
     return 0;
