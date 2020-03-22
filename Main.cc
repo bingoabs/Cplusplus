@@ -31,35 +31,29 @@ using std::set;
 using std::multiset;
 using std::shared_ptr;
 using std::unique_ptr;
-
+using std::allocator;
 
 
 int main(int argc, char *argv[])
 {
-    size_t max = 2;
-    char *storage = new char[max];
-    size_t curr = 0;
-    string input;
-    while(std::getline(cin, input))
-    {
-        for(auto e : input)
-        {
-            if (curr < max)
-                storage[curr++] = e;
-            else
-            {
-                cout << "extend the array" << endl;
-                char *temp = storage;
-                size_t oldMax = max;
-                max *= 2;
-                storage = new char[max];
-                for(size_t a = 0; a < oldMax; a++)
-                    storage[a] = temp[a];
-                storage[curr++] = e;
-            }
-            
-        }
-    }
-    for(size_t a = 0; a < curr; a++)
-        cout << storage[a] << " ";
+    size_t n = 100;
+    // string *const p = new string[n];
+    // string s;
+    // string *q = p;
+    // while(cin >> s && q != p + n)
+    //     *q++ = s;
+    // const size_t size = q - p;
+    // delete [] p;
+    allocator<string> alloc;
+    // auto const p = alloc.allocate(n);
+    string *const p = alloc.allocate(n); //string const *p = alloc.allocate(n); is error expression
+    auto q = p;
+    alloc.construct(q++);
+    alloc.construct(q++, 10, 'c');
+    alloc.construct(q++, "hi");
+    cout << *p << endl;
+    cout << *q << endl;
+    while(q != p)
+        alloc.destroy(--q);
+    alloc.deallocate(p, n);
 } 
