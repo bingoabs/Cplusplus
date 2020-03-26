@@ -35,34 +35,27 @@ using std::unique_ptr;
 using std::allocator;
 using std::ifstream;
 
-struct X {
-    X() {std::cout << "X()" << std::endl;}
-    X(const X&) {std::cout << "X(const X&" << std::endl;}
-    X& operator=(const X &rhs)
-    {
-        std::cout << "operator= (const X &rhs)" << endl;
-        return *this;
-    }
-    ~X(){
-        std::cout << "~X()" << endl;
-    }
+class Employee{
+    string Name;
+    int Id;
+    static int Num;
+public:
+    Employee() = default;
+    Employee(string name):Name(name), Id(Num++){}
+    int GetId();
 };
-
-struct NoDtor{
-    NoDtor() = default;
-    ~NoDtor() = delete; // it is impossible to destrop the NoDtor object
-};
+int Employee::Num = 0;
+int Employee::GetId(){
+    return Id;
+}
 
 int main(int argc, char *argv[])
 {
-    X a, b;
-    std::cout << "-----" << std::endl;
-    a = X();
-    std::cout << "-----" << std::endl;
-    b = a;
-    std::cout << "-----" << std::endl;
-    auto c = &b;
-    std::cout << "-----" << std::endl;
-    X *d = new X;
-    std::cout << "-----" << std::endl;
+    Employee a("one"), b("two");
+    cout << a.GetId() << endl;
+    cout << b.GetId() << endl;
+    Employee *c = new Employee();
+    Employee *d = new Employee;
+    cout << c->GetId() << endl;
+    cout << d->GetId() << endl;
 } 
