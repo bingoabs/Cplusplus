@@ -14,7 +14,7 @@
 #include <set>
 #include <utility>
 #include <memory>
-#include <isstream>
+#include <istream>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -35,29 +35,29 @@ using std::unique_ptr;
 using std::allocator;
 using std::ifstream;
 
-class Sales_data {
-public:
-    Sales_data(const Sales_data&);
-private:
-    std::string bookNo;
-    int units_sold = 0;
-    double revenue = 0.0;
+struct X {
+    X() {std::cout << "X()" << std::endl;}
+    X(const X&) {std::cout << "X(const X&" << std::endl;}
+    X& operator=(const X &rhs)
+    {
+        std::cout << "operator= (const X &rhs)" << endl;
+        return *this;
+    }
+    ~X(){
+        std::cout << "~X()" << endl;
+    }
 };
 
-Sales_data::Sales_data(const Sales_data &orid):
-    bookNo(orid.bookNo),
-    units_sold(orid.units_sold),
-    revenue(orid.revenue)
-    { }
-Sales_data&
-Sales_data::operator=(const Sales_data &rhs)
-{
-    bookNo = rhs.bookNo;
-    units_sold = rhs.units_sold;
-    revenue = rhs.revenue;
-    return *this;
-}
 int main(int argc, char *argv[])
 {
-    return 0;
+    X a, b;
+    std::cout << "-----" << std::endl;
+    a = X();
+    std::cout << "-----" << std::endl;
+    b = a;
+    std::cout << "-----" << std::endl;
+    auto c = &b;
+    std::cout << "-----" << std::endl;
+    X *d = new X;
+    std::cout << "-----" << std::endl;
 } 
