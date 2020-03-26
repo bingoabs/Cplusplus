@@ -38,11 +38,22 @@ using std::ifstream;
 class HasPtr{
     friend void swap(HasPtr&, HasPtr&);
     public:
-        string *ps;
         int i;
+        string *ps;
+        HasPtr():ps(new string()), i(0){}
+        HasPtr(int n):ps(new string()), i(n){}
+        bool operator<(const HasPtr&);
+        ~HasPtr(){
+            delete ps;
+        }
 };
+bool HasPtr::operator<(const HasPtr &rhs){
+    return rhs.i > i;
+}
+
 inline void swap(HasPtr &lhs, HasPtr &rhs)
 {
+    cout << "into swap" << endl;
     using std::swap;
     swap(lhs.ps, rhs.ps);
     swap(lhs.i, rhs.i);
@@ -50,5 +61,8 @@ inline void swap(HasPtr &lhs, HasPtr &rhs)
 
 int main(int argc, char *argv[])
 {
+    vector<HasPtr> a{HasPtr(10), HasPtr(2), HasPtr(11)};
+    a.push_back(HasPtr(5));
+    std::sort(a.begin(), a.end());
     return 0;
 } 
