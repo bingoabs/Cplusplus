@@ -35,73 +35,93 @@ using std::unique_ptr;
 using std::allocator;
 using std::ifstream;
 
-// Value Type class
-// class HasPtr{
-//     private:
-//         int Age;
-//         string *Name;
-//     public:
-//         HasPtr(int age, string name):Age(age),Name(new string(name)){}
-//         HasPtr(const HasPtr&);
-//         HasPtr& operator=(const HasPtr&);
-//         ~HasPtr();
-// };
-
-// HasPtr::HasPtr(const HasPtr& rhs):
-//     Name(new string(*rhs.Name)), Age(rhs.Age){}
-
-// HasPtr::~HasPtr() { delete Name;}
-
-// HasPtr& HasPtr::operator=(const HasPtr& rhs)
-// {
-//     auto newp = new string(*rhs.Name);
-//     delete Name;
-//     Name = newp;
-//     Age = rhs.Age;
-//     return *this;
-// }
-
-// Shared Type class
-
-class HasPtr
-{
-    public:
-        HasPtr(const string &s = string()):
-            ps(new string(s)), i(0), use(new std::size_t(1)){}
-        HasPtr(const HasPtr &p):
-            ps(p.ps), i(p.i), use(p.use){++*use;}
-        HasPtr& operator=(const HasPtr&);
-        ~HasPtr();
+class TreeNode {
     private:
-        string *ps;
-        int i;
-        size_t *use; // used to record the number of references
+        string value;
+        int cout;
+        TreeNode *left;
+        TreeNode *right;
+    public:
+        TreeNode(string v):value(v),left(nullptr),right(nullptr){}
+        TreeNode(const TreeNode&);
+        void Set(TreeNode& left, TreeNode& right);
+        TreeNode& operator=(const TreeNode&);
+        ~TreeNode();
 };
 
-HasPtr::~HasPtr()
-{
-    if (--*use == 0)
-    {
-        delete ps;
-        delete use;
-    }
+TreeNode::~TreeNode(){
+    if (left != nullptr)
+        delete left;
+    if (right != nullptr)
+        delete right;
+}
+// The key point to decide the copy
+TreeNode& TreeNode::operator=(const TreeNode &rhs){
+    if (rhs.left != nullptr)
+        left = new TreeNode(*rhs.left);
+    if (rhs.right != nullptr)
+        right = new TreeNode(*rhs.right);
+    cout = rhs.cout;
+    value = rhs.value;
+    return *this;
 }
 
-HasPtr& HasPtr::operator=(const HasPtr &rhs)
+TreeNode::TreeNode(const TreeNode &s)
 {
-    ++*rhs.use;
-    if(--*use == 0)
+    // copy the ptr, the object are same
+    // left = s.left;
+    // right = s.right;
+    // value = s.value;
+    // cout = s.cout;
+
+    // or operator= to copy the object, not the ptr
+    if (s.left != nullptr)
     {
-        delete ps;
-        delete use;
+        std::cout << "copy left: " << s.value << endl;
+        left = new TreeNode(*s.left);
     }
-    ps = rhs.ps;
-    use = rhs.use;
-    i = rhs.i;
-    return *this;
+    else
+    {
+        left = nullptr;
+    }
+    
+    if (s.right != nullptr)
+    {
+        std::cout << "copy right: " << s.value << endl;
+        right = new TreeNode(*s.right);
+    }
+    else
+    {
+        right = nullptr;
+    }
+    
+    value = s.value;
+    cout = s.cout;
+}
+
+void TreeNode::Set(TreeNode& l, TreeNode& r){
+    std::cout << "begin Set left" << endl;
+    left = new TreeNode(l);
+    std::cout << "begin Set right" << endl;
+    right = new TreeNode(r);
+    std::cout << "finish Set" << endl;
 }
 
 int main(int argc, char *argv[])
 {
+    TreeNode root("root");
+    std::cout << "-----" << endl;
+    TreeNode first("first"), second("second");
+    std::cout << "-----" << endl;
+    TreeNode first1("first1"), first2("first2");
+    first.Set(first1, first2);
+    std::cout << "-----" << endl;
+    TreeNode second1("second1"), second2("second2");
+    second.Set(second1, second2);
+    std::cout << "-----" << endl;
+    root.Set(first, second);
+    std::cout << "-----" << endl;
+    TreeNode rc = root;
+    cout << "here" << endl;
     return 0;
 } 
