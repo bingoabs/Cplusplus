@@ -42,13 +42,24 @@ class Employee{
 public:
     Employee() = default;
     Employee(string name):Name(name), Id(Num++){}
+    Employee(const Employee&);
     int GetId();
+    Employee& operator=(const Employee&);
 };
 int Employee::Num = 0;
 int Employee::GetId(){
     return Id;
 }
-
+Employee::Employee(const Employee &v){
+    Name = v.Name + "_copy";
+    Id = Num++;
+}
+Employee& Employee::operator=(const Employee& rhs)
+{
+    Name = rhs.Name;
+    Id = Num++;
+    return *this;
+};
 int main(int argc, char *argv[])
 {
     Employee a("one"), b("two");
@@ -58,4 +69,9 @@ int main(int argc, char *argv[])
     Employee *d = new Employee;
     cout << c->GetId() << endl;
     cout << d->GetId() << endl;
+    cout << "------" << endl;
+    Employee f(a), g;
+    g = b;
+    cout << f.GetId() << endl;
+    cout << g.GetId() << endl;
 } 
