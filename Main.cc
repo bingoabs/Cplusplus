@@ -35,28 +35,69 @@ using std::unique_ptr;
 using std::allocator;
 using std::ifstream;
 
-class HasPtr{
-    private:
-        int Age;
-        string *Name;
+// Value Type class
+// class HasPtr{
+//     private:
+//         int Age;
+//         string *Name;
+//     public:
+//         HasPtr(int age, string name):Age(age),Name(new string(name)){}
+//         HasPtr(const HasPtr&);
+//         HasPtr& operator=(const HasPtr&);
+//         ~HasPtr();
+// };
+
+// HasPtr::HasPtr(const HasPtr& rhs):
+//     Name(new string(*rhs.Name)), Age(rhs.Age){}
+
+// HasPtr::~HasPtr() { delete Name;}
+
+// HasPtr& HasPtr::operator=(const HasPtr& rhs)
+// {
+//     auto newp = new string(*rhs.Name);
+//     delete Name;
+//     Name = newp;
+//     Age = rhs.Age;
+//     return *this;
+// }
+
+// Shared Type class
+
+class HasPtr
+{
     public:
-        HasPtr(int age, string name):Age(age),Name(new string(name)){}
-        HasPtr(const HasPtr&);
+        HasPtr(const string &s = string()):
+            ps(new string(s)), i(0), use(new std::size_t(1)){}
+        HasPtr(const HasPtr &p):
+            ps(p.ps), i(p.i), use(p.use){++*use;}
         HasPtr& operator=(const HasPtr&);
         ~HasPtr();
+    private:
+        string *ps;
+        int i;
+        size_t *use; // used to record the number of references
 };
 
-HasPtr::HasPtr(const HasPtr& rhs):
-    Name(new string(*rhs.Name)), Age(rhs.Age){}
-
-HasPtr::~HasPtr() { delete Name;}
-
-HasPtr& HasPtr::operator=(const HasPtr& rhs)
+HasPtr::~HasPtr()
 {
-    auto newp = new string(*rhs.Name);
-    delete Name;
-    Name = newp;
-    Age = rhs.Age;
+    if (--*use == 0)
+    {
+        delete ps;
+        delete use;
+    }
+}
+
+HasPtr& HasPtr::operator=(const HasPtr &rhs)
+{
+    ++*rhs.use;
+    if(--*use == 0)
+    {
+        delete ps;
+        delete use;
+    }
+    ps = rhs.ps;
+    use = rhs.use;
+    i = rhs.i;
     return *this;
 }
 
