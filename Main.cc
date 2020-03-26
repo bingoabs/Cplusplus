@@ -48,6 +48,11 @@ struct X {
     }
 };
 
+struct NoDtor{
+    NoDtor() = default;
+    ~NoDtor() = delete; // it is impossible to destrop the NoDtor object
+};
+
 int main(int argc, char *argv[])
 {
     X a, b;
