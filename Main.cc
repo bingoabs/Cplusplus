@@ -35,43 +35,32 @@ using std::unique_ptr;
 using std::allocator;
 using std::ifstream;
 
-class Employee{
-    string Name;
-    int Id;
-    static int Num;
-public:
-    Employee() = default;
-    Employee(string name):Name(name), Id(Num++){}
-    Employee(const Employee&);
-    int GetId();
-    Employee& operator=(const Employee&);
+class HasPtr{
+    private:
+        int Age;
+        string *Name;
+    public:
+        HasPtr(int age, string name):Age(age),Name(new string(name)){}
+        HasPtr(const HasPtr&);
+        HasPtr& operator=(const HasPtr&);
+        ~HasPtr();
 };
-int Employee::Num = 0;
-int Employee::GetId(){
-    return Id;
-}
-Employee::Employee(const Employee &v){
-    Name = v.Name + "_copy";
-    Id = Num++;
-}
-Employee& Employee::operator=(const Employee& rhs)
+
+HasPtr::HasPtr(const HasPtr& rhs):
+    Name(new string(*rhs.Name)), Age(rhs.Age){}
+
+HasPtr::~HasPtr() { delete Name;}
+
+HasPtr& HasPtr::operator=(const HasPtr& rhs)
 {
-    Name = rhs.Name;
-    Id = Num++;
+    auto newp = new string(*rhs.Name);
+    delete Name;
+    Name = newp;
+    Age = rhs.Age;
     return *this;
-};
+}
+
 int main(int argc, char *argv[])
 {
-    Employee a("one"), b("two");
-    cout << a.GetId() << endl;
-    cout << b.GetId() << endl;
-    Employee *c = new Employee();
-    Employee *d = new Employee;
-    cout << c->GetId() << endl;
-    cout << d->GetId() << endl;
-    cout << "------" << endl;
-    Employee f(a), g;
-    g = b;
-    cout << f.GetId() << endl;
-    cout << g.GetId() << endl;
+    return 0;
 } 
