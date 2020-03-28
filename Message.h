@@ -9,6 +9,7 @@ public:
     void addMsg(Message*);
     void remMsg(Message*);
     void listMsgs();
+    ~Folder();
 private:
     std::string Name;
     std::set<Message*> msgs;

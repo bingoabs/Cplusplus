@@ -100,3 +100,9 @@ void Folder::listMsgs()
     for(auto m : msgs)
         std::cout << m->contents << std::endl;
 }
+// First version misses this function, it is very important!
+Folder::~Folder()
+{
+    for(auto m : msgs)
+        m->remFolder(this);
+}
