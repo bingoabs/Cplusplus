@@ -1,6 +1,22 @@
 #include <iostream>
 #include "Message.cc"
 
+// class strVec
+// {
+//     public:
+//         strVec& operator=(strVec &&rhs) noexcept 
+//         {
+//             if(this != &rhs)
+//             {
+//                 free();
+//                 elements = rhs.elements;
+//                 first_free = rhs.first_free;
+//                 cap = rhs.cap;
+//                 rhs.elements = rhs.first_free = rhs.cap = nullptr;
+//             }
+//         }
+// };
+
 int main(int argc, char *argv[])
 {
     Message m1("MsgOne"), m2("MsgTwo");
