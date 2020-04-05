@@ -1,19 +1,24 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <algorithm>
 #include "Message.cc"
 
-struct equal {
+class getLen{
     public:
-        equal()=default;
-        bool operator()(const int &a, const int &b)
+        getLen(const int i):num(i){}
+        bool operator()(const std::string str)
         {
-            return (a == b);
+            return (str.size() == num);
         }
+    private:
+        int num;
 };
 
 int main(int argc, char *argv[])
 {
-    equal e;
-    std::cout << e(10, 100) << e(10, 10) << std::endl;
+    std::vector<std::string> a = {"a", "ab", "abc", "abcd", "abcde"};
+    auto wc = std::find_if(a.begin(), a.end(), getLen(4));
+    std::cout << *wc << std::endl;
     return 0;
 } 
