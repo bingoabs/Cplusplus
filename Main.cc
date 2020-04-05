@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <functional>
 #include "Message.cc"
 
 class getLen{
@@ -17,8 +18,7 @@ class getLen{
 
 int main(int argc, char *argv[])
 {
-    std::vector<std::string> a = {"a", "ab", "abc", "abcd", "abcde"};
-    auto wc = std::find_if(a.begin(), a.end(), getLen(4));
-    std::cout << *wc << std::endl;
+    std::vector<std::string> ivec = {"a", "ab", "abc", "abcd", "abcde"};
+    //std::count_if(ivec.cbegin(), ivec.cend(), std::bind(std::greater<int>(), _1, 1024));
     return 0;
 } 
