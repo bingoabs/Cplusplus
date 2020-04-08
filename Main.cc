@@ -1,29 +1,29 @@
+#include <utility>
+
 class Base {
-    friend class Pal;
-    int test;
-    protected:
-        int prot_mem;
-};
-
-class Sneaky : public Base { // private or protected [Base] would raise error!
-    friend void clobber(Sneaky&);
-    friend void clobber(Base&);
-    int j;
-};
-
-class Pal {
     public:
-        int f(Base b){return b.prot_mem;}
-        int ff(Base b) { return b.test;};
-        // friend can visit the private member
-        // ok: Pal is a friend of Base
-        // int f2(Sneaky s){return s.j;} 
-        // error: Pal not friend of Sneaky
-        // access to a base class is controlled by the base class, even inside a derived object
-        int f3(Sneaky s) { return s.prot_mem;}
-        // ok: Pal is a friend;
+        std::size_t size() const {return n;}
+    protected:
+        std::size_t n;
 };
 
+class Derived : private Base {
+    public:
+        // maintain access levels for members related to the size of the object
+        using Base::size;
+    protected:
+        using Base::n;
+};
+
+class Disc_quote {
+    size_t  quantity;
+    double discount;
+public:
+    std::pair<size_t, double> discount_policy() const 
+    {
+        return {quantity, discount};
+    }
+};
 
 int main(int argc, char *argv[])
 {
