@@ -1,29 +1,24 @@
 #include <utility>
 
-class Base {
-    public:
-        std::size_t size() const {return n;}
-    protected:
-        std::size_t n;
+struct Base {
+    int memfcn();
 };
 
-class Derived : private Base {
-    public:
-        // maintain access levels for members related to the size of the object
-        using Base::size;
-    protected:
-        using Base::n;
+struct Derived : Base {
+    int memfcn(int); 
+    // hides memfcn in the base even different functions!
 };
 
-class Disc_quote {
-    size_t  quantity;
-    double discount;
-public:
-    std::pair<size_t, double> discount_policy() const 
-    {
-        return {quantity, discount};
-    }
+class D : public B {
+    // no constructors
 };
+
+D d;
+D d2(d);
+// error, because call the deleted copy constructor;
+D d3(std::move(d));
+// error, because implicitly uses D's deleted copy constructor
+
 
 int main(int argc, char *argv[])
 {
