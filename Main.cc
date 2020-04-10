@@ -4,34 +4,64 @@
 #include <algorithm>
 #include <numeric>
 #include <memory>
+#include <string>
+#include <set>
 
+using std::string;
 using std::vector;
 using std::cout;
 using std::endl;
 
+
 // Put (Smart) Pointers, Not Objects, in Containers
 
 class Quote{
-    int num;
+    int price;
+    string bns;
 public:
-    Quote():num(10){}
+    Quote(string bn):price(10), bns(bn){}
     virtual int net_price(){
-        return num;
+        return price;
+    }
+    string isbn()
+    {
+        return bns;
     }
 };
 
 class Bulk_quote : public Quote {
 public:
-    Bulk_quote():Quote(){
-        num = 100;
+    Bulk_quote(string bn):Quote(bn){
+        p = 100;
     }
     int net_price() override
     // if don't overrid the virtual function
     // then the return value is 10!
     {
-        return num;
+        return p;
     }
-    int num;
+    int p;
+};
+
+class Basket {
+    public:
+        // Basket uses synthesized default constructor and copy-control members
+        void add_item(const std::shared_ptr<Quote> &sale)
+        {
+            items.insert(sale);
+        }
+        // prints the total price for each book and the overall total for all items in the basket
+        double total_receipts(std::ostream&) const;
+    private:
+        // function to compare shared_ptrs needed by the multiset member
+        static bool compare(const std::shared_ptr<Quote> &lhs,
+            const std::shared_ptr<Quote> &rhs)
+            {
+                return lhs->isbn() < rhs->isbn();
+            }
+        // items is the member of the class, so it can use the private "compare" function!
+        std::multiset<std::shared_ptr<Quote>, decltype(compare)*> 
+            items{compare};
 };
 
 int main(int argc, char *argv[])
