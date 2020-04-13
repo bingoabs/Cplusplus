@@ -14,7 +14,7 @@ void insertion_sort(int* begin, int* end)
     {
         int current = *cur_ptr;
         last_ptr = cur_ptr - 1;
-        while((last_ptr >= begin) && (*last_ptr > current))
+        while((last_ptr >= begin) && (*last_ptr < current))
         {
             *(last_ptr + 1) = *last_ptr;
             last_ptr -= 1;
