@@ -156,7 +156,8 @@ QueryResult NotQuery::eval(const TextQuery& text) const
         /*
         This part is beautiful to extract the 'not' element
         But the premise is the first element of 'sz' is small than the first element of 'result'
-        And both of them are sorted
+        And both of them are sorted'
+        */
     }
     return QueryResult(rep(), ret_lines, result.get_file());
 }
