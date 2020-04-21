@@ -35,6 +35,39 @@ void check(int* beg, int* end, int t)
         cout << "No" << endl;
 }
 
+template <int Size>
+void sum(int (&arr1)[Size], int (&arr2)[Size])
+{
+    int arr3[Size+1];
+    for(int index = 0, add = 0; index < Size; ++index)
+    {
+        int temp = arr1[index] + arr2[index] + add;
+        if(temp == 0)
+        {
+            arr3[index] = 0;
+            add = 0;
+        }
+        if(temp == 1)
+        {
+            arr3[index] = 1;
+            add = 0;
+        }
+        if (temp == 2)
+        {
+            arr3[index] = 0;
+            add = 1;
+        }
+        if (temp == 3){
+            arr3[index] = 1;
+            add = 1;
+        }
+    }
+    for(int i : arr3)
+    {
+        cout << i << " ";
+    }
+    cout << endl;
+}
 int main()
 {
     // int arr[] = {10, 2, 3, 12, 3, 1};
@@ -44,8 +77,12 @@ int main()
     //     cout << e << " ";
     // }
     // cout << endl;
-    int arr[] = {10, 2, 3, 12, 3, 1};
-    check(begin(arr), end(arr), 10);
-    check(begin(arr), end(arr), 15);
-    return 0;
+    // int arr[] = {10, 2, 3, 12, 3, 1};
+    // check(begin(arr), end(arr), 10);
+    // check(begin(arr), end(arr), 15);
+    // return 0;
+
+    int arr1[5] = {1, 0, 0, 1, 1};
+    int arr2[5] = {0, 1, 1, 1, 1};
+    sum(arr1, arr2);
 }
