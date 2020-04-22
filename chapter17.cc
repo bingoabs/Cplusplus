@@ -243,12 +243,25 @@ using std::vector;
 // }
 
 
+// int main()
+// {
+//     std::default_random_engine e; // generate unsigned integer
+//     std::uniform_real_distribution<double> u(0, 1);
+//     for(size_t i = 0; i < 10; ++i)
+//     {
+//         cout << u(e) << " ";
+//     }
+// }
+
 int main()
 {
-    std::default_random_engine e; // generate unsigned integer
-    std::uniform_real_distribution<double> u(0, 1);
-    for(size_t i = 0; i < 10; ++i)
-    {
-        cout << u(e) << " ";
-    }
+    cout << "default bool values: " << true << " " << false
+        << "\nalpha bool values: " << std::boolalpha // << std::noboolalpha
+        << true << " " << false << endl;
+    cout << std::showbase;
+    cout << "default: " << 20 << " " << 1024 << endl;
+    cout << "octal: " << std::oct << 20 << " " << 1024 << endl;
+    cout << "hex: " << std::hex << 20 << " " << 1024 << endl;
+    cout << "decimal: " << std::dec << 20 << " " << 1024 << endl;
+    cout << std::noshowbase;
 }
