@@ -4,6 +4,8 @@
 #include <vector>
 #include <regex>
 #include <string>
+#include <random>
+#include <ctime>
 
 using std::string;
 using std::endl;
@@ -161,20 +163,92 @@ using std::vector;
 //         cout << it->str() << endl; // matched word
 // }
 
+// int main()
+// {
+//     string phone = 
+//         "(\\()?(\\d{3})(\\))?([-. ])?(\\d{3})([-. ])?(\\d{4})";
+//     std::regex r(phone); // a regex to find our pattern
+//     std::smatch m;
+//     string s;
+//     string fmt = "$2.$5.$7"; // reformat numbers to ddd.ddd.dddd
+//     // read each record from the input file
+//     while(std::getline(std::cin, s))
+//         cout << std::regex_replace(s, r, fmt) << endl;
+//     return 0;
+//     /*
+//     We red each record into s and hand that record to regex_replace. 
+//     This function finds and transforms all the matches in its input sequence.
+//     */
+// }   
+
+
+// vector<unsigned> bad_randVec()
+// {
+//     std::default_random_engine e;
+//     std::uniform_int_distribution<unsigned> u(0, 9);
+//     vector<unsigned> ret;
+//     for(size_t i = 0; i < 100; ++i)
+//         ret.push_back(u(e));
+//     return ret;
+// }
+// vector<unsigned> goo_randVec()
+// {
+//     static std::default_random_engine e;
+//     static std::uniform_int_distribution<unsigned> u(0, 9);
+//     vector<unsigned> ret;
+//     for(size_t i = 0; i < 100; ++i)
+//     {
+//         ret.push_back(u(e));
+//     }
+//     return ret;
+// }
+
+// int main()
+// {
+//     std::default_random_engine e;
+//     for(size_t i = 0; i < 10; ++i)
+//         // e() "call" the object to generate the next random number
+//         cout << e() << " ";
+//     cout << endl;
+//     std::uniform_int_distribution<unsigned> u(0, 9);
+//     for(size_t i = 0; i < 10; i++)
+//         // set the u to the random source
+//         // every call will return the value in the range 
+//         cout << u(e) << " ";
+//     cout << endl;
+//     // the results are same!
+//     for(auto i = 0; i < 2; i++)
+//     {
+//         vector<unsigned> a = bad_randVec();
+//         for(auto i : a)
+//         {
+//             cout << i << " ";
+//         }
+//         cout << endl;
+//     }
+
+//     std::default_random_engine e1; // using default seed
+//     std::default_random_engine e2(2147483646);
+//     std::default_random_engine e3; // using default seed
+//     e3.seed(32767); // call seed to set a new seed
+//     std::default_random_engine e4(32767); // set the seed to 32767
+//     for(size_t i = 0; i != 100; ++i)
+//     {
+//         if (e1() == e2())
+//             cout << "unseeded match at iteration: " << i << endl;
+//         if (e3() == e4())
+//             cout << "seeded differs at iteration: " << i << endl;
+//     }
+//     std::default_random_engine e5(time(0)); // using the timestamp as the seed
+// }
+
+
 int main()
 {
-    string phone = 
-        "(\\()?(\\d{3})(\\))?([-. ])?(\\d{3})([-. ])?(\\d{4})";
-    std::regex r(phone); // a regex to find our pattern
-    std::smatch m;
-    string s;
-    string fmt = "$2.$5.$7"; // reformat numbers to ddd.ddd.dddd
-    // read each record from the input file
-    while(std::getline(std::cin, s))
-        cout << std::regex_replace(s, r, fmt) << endl;
-    return 0;
-    /*
-    We red each record into s and hand that record to regex_replace. 
-    This function finds and transforms all the matches in its input sequence.
-    */
-}   
+    std::default_random_engine e; // generate unsigned integer
+    std::uniform_real_distribution<double> u(0, 1);
+    for(size_t i = 0; i < 10; ++i)
+    {
+        cout << u(e) << " ";
+    }
+}
