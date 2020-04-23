@@ -6,6 +6,8 @@
 #include <string>
 #include <random>
 #include <ctime>
+#include <iomanip>
+#include <fstream>
 
 using std::string;
 using std::endl;
@@ -206,6 +208,7 @@ using std::vector;
 // int main()
 // {
 //     std::default_random_engine e;
+
 //     for(size_t i = 0; i < 10; ++i)
 //         // e() "call" the object to generate the next random number
 //         cout << e() << " ";
@@ -253,15 +256,130 @@ using std::vector;
 //     }
 // }
 
-int main()
-{
-    cout << "default bool values: " << true << " " << false
-        << "\nalpha bool values: " << std::boolalpha // << std::noboolalpha
-        << true << " " << false << endl;
-    cout << std::showbase;
-    cout << "default: " << 20 << " " << 1024 << endl;
-    cout << "octal: " << std::oct << 20 << " " << 1024 << endl;
-    cout << "hex: " << std::hex << 20 << " " << 1024 << endl;
-    cout << "decimal: " << std::dec << 20 << " " << 1024 << endl;
-    cout << std::noshowbase;
-}
+// int main()
+// {
+//     cout << "default bool values: " << true << " " << false
+//         << "\nalpha bool values: " << std::boolalpha // << std::noboolalpha
+//         << true << " " << false << endl;
+//     cout << std::showbase;
+//     cout << "default: " << 20 << " " << 1024 << endl;
+//     cout << "octal: " << std::oct << 20 << " " << 1024 << endl;
+//     cout << "hex: " << std::hex << 20 << " " << 1024 << endl;
+//     cout << "decimal: " << std::dec << 20 << " " << 1024 << endl;
+//     cout << std::noshowbase;
+// }
+
+//     std::normal_distribution<double> n(4, 1.5);
+//     vector<unsigned> vals(9);
+//     for(size_t i = 0; i != 200; ++i)
+//     {
+//         unsigned v = lround(n(e));
+//         if(v < vals.size())
+//             ++vals[v];
+//     }
+//     for(size_t j = 0; j != vals.size(); ++j)
+//         cout << j << ": " << string(vals[j], '*') << endl;
+// }
+
+// bool play(bool input)
+// {
+//     return input;
+// }
+// int main()
+// {
+//     string resp;
+//     std::default_random_engine e; // e has state, so it must be outside the loop!
+//     std::bernoulli_distribution b; // 50 / 50 odds by default
+//     do {
+//         bool first = b(e); // if true, the program will go first
+//         cout << (first ? " We go first"
+//             :"You get to go first") << endl;
+//         // play the game passing the indicator of who goes first
+//         cout << ((play(first)) ? "sorry, you lost"
+//             : "congrats, you won") << endl;
+//         cout << "play again? Enter 'yes' or 'no'" << endl;
+//     } while(std::cin >> resp && resp[0] == 'y');
+// }
+
+// int main()
+// {
+//     cout << std::hex << std::uppercase << time(0) << endl;
+//     cout << std::dec;
+//     cout << sqrt(2.0) << endl;
+// }
+/*
+// int main()
+// {
+//     int ch; // use an int, not a char to hold the return from get()
+//     // loop to read and write all the data in th input
+//     while((ch = std::cin.get()) != EOF)
+//         cout.put(ch);
+// }
+*/
+// int main()
+// {
+    // Part 1:
+    // char clist[20];
+    // std::ifstream  inf("temp.md");
+    // inf.getline(clist, 17, '\n');
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // cout << inf.gcount() << endl;
+    // cout << clist << endl;
+    // inf.getline(clist, 17, '\n');
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // cout << inf.gcount() << endl;
+    // cout << clist << endl;
+    // inf.getline(clist, 17, '\n');
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // cout << inf.gcount() << endl;
+    // cout << clist << endl;
+
+    // char clist[20];
+    // std::ifstream  inf("temp.md");
+    // inf.getline(clist, 2, '\n');
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // cout << inf.gcount() << endl;
+    // cout << clist << endl;
+    // // clear will keep on reading the current line following the readed characters
+    // inf.clear();
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // inf.getline(clist, 2, '\n');
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // cout << inf.gcount() << endl;
+    // cout << clist << endl;
+    // inf.clear();
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // inf.getline(clist, 2, '\n');
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // cout << inf.gcount() << endl;
+    // cout << clist << endl;
+
+    // char clist[10];
+    // std::ifstream  inf("temp.md");
+    // // if the clist size less than the parameter, 
+    // // the getlin still inserts the data!
+    // // It can break the other data!
+    // inf.getline(clist, 15, '\n');
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // cout << inf.gcount() << endl;
+    // cout << clist << endl;
+    // inf.getline(clist, 2, '\n');
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // cout << inf.gcount() << endl;
+    // cout << clist << endl;
+    // inf.getline(clist, 12, '\n');
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // cout << inf.gcount() << endl;
+    // cout << clist << endl;
+
+
+    // char clist[20];
+    // std::ifstream  inf("temp.md");
+    // inf.clear(std::ios_base::failbit);
+    // // if the iostream is in failbit, it can't use the getline to read the data!
+    // inf.getline(clist, 2, '\n');
+    // cout << std::boolalpha << (inf.rdstate() == std::ios_base::failbit) << endl;
+    // cout << inf.gcount() << endl;
+    // cout << clist << endl;
+// }
+
