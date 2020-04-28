@@ -383,3 +383,107 @@ using std::vector;
     // cout << clist << endl;
 // }
 
+// #include <iomanip>
+
+// int main()
+// {
+//     cout << "Precision: " << cout.precision()
+//         << ", Value: " << sqrt(2.0) << endl;
+//     cout.precision(12);
+//     cout << "Precision: " << cout.precision()
+//         << ", Value: " << sqrt(2.0) << endl;
+//     cout << std::setprecision(3);
+//     cout << "Precision: " << cout.precision()
+//         << ", Value: " << sqrt(2.0) << endl;
+
+// }
+
+// int main()
+// {
+//     int i = -16;
+//     double d = 3.1415926;
+//     cout << "i: " << std::setw(12) << i << "next col" << '\n'
+//         << "d: " << std::setw(12) << d << "next col" << '\n';
+//     cout << std::left 
+//         << "i: " << std::setw(12) << i << "next col" << '\n'
+//         << "d: " << std::setw(12) << d << "next col" << '\n'
+//         << std::right;
+//     cout << std::right
+//         << "i: " << std::setw(12) << i << "next col" << '\n'
+//         << "d: " << std::setw(12) << d << "next col" << '\n';
+//     cout << std::internal 
+//         << "i: " << std::setw(12) << i << "next col" << '\n'
+//         << "d: " << std::setw(12) << d << "next col" << '\n';
+//     cout << std::setfill('#')
+//         << "i: " << std::setw(12) << i << "next col" << '\n'
+//         << "d: " << std::setw(12) << d << "next col" << '\n'
+//         << std::setfill(' ');
+// }
+
+// template <typename T>
+// class Blob {
+//     Blob(std::initializer_list<T>);
+//     std::shared_ptr<std::vector<T>> data;
+// };
+
+// template <typename T>
+// Blob<T>::Blob(std::initializer_list<T> il) 
+//     try : data(std::make_shared<std::vector<T>>(il))
+//     {
+
+//     } catch(const std::bad_alloc &e) {
+//         // handle_out_of_memory(e);
+//     }
+
+// int main()
+// {
+//     void (*pf1)(int) noexcept = recoup;
+//     void (*pf2)(int) = recoup;
+
+//     pf1 = alloc; // error, alloc may raise error, so doesn't match the declare
+//     pf2 = alloc;
+// }
+
+// class Base {
+//     public:
+//         virtual double f1(double) noexcept;
+//         virtual int f2() noexcept(false);
+//         virtual void f3();
+// };
+
+// class Defived : public Base {
+//     public:
+//         double f1(double); // error, Base::f1 don't raise error
+//         int f2() noexcept(false); // right; same as the declare in Base
+//         void f3() noexcept;
+// };
+
+class out_of_stock: public std::runtime_error
+{
+    public:
+        explicit out_of_stock(const std::string &s):
+            std::runtime_error(s){}
+};
+
+class isbn_mismatch: public std::logic_error {
+    public:
+        explicit isbn_mismatch(const std::string &s):
+            std::logic_error(s){}
+        isbn_mismatch(const std::string &s,
+            const std::string &lhs, const std::string &rhs):
+            std::logic_error(s), left(lhs), right(rhs){}
+        const std::string left, right;
+};
+
+int main()
+{
+    // usage
+    try {
+
+        throw isbn_mismatch("wrong isbns", isbn(), rhs.isbn());
+    } catch (const isbn_mismatch &e)
+    {
+        std::cerr << e.what() << ": left isbn(" << e.left
+            <<") right isbn(" << e.right << ")" << endl;
+    }
+}
