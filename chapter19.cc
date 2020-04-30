@@ -243,51 +243,165 @@ using namespace std;
 //     cout << "end" << endl;
 // }
 
-class Token {
-public:
-    Token(): tok(INT), ival(0) {};
-    Token(const Token &t) : tok(t.tok) {copyUnion(t);}
-    Token &operator=(const Token&);
-    ~Token() { if (tok == STR) sval.~string();}
-    Token &operator=(const std::string&);
-    Token &operator=(char);
-    Token &operator=(int);
-    Token &operator=(double);
-    // void print()
-    // {
-    //     test.test();
-    // }
-private:
-    enum {INT, CHAR, DBL, STR} tok; // class or struct can also use this format to define a member!
-    // class {
-    // public:
-    //     void test(){
-    //         cout << "test" << endl;
-    //     }
-    // } test;
-    union {
-        char cval;
-        int ival;
-        double dval;
-        std::string sval;
-    };
-    void copyUnion(const Token&);
-};
+// class Token {
+// public:
+//     Token(): tok(INT), ival(0) {};
+//     Token(const Token &t) : tok(t.tok) {copyUnion(t);}
+//     Token &operator=(const Token&);
+//     Token(Token &&t) noexcept;
+//     Token &operator=(Token &&t) noexcept;
+//     ~Token() { if (tok == STR) sval.~string();}
+//     Token &operator=(const std::string&);
+//     Token &operator=(char);
+//     Token &operator=(int);
+//     Token &operator=(double);
+//     // void print()
+//     // {
+//     //     test.test();
+//     // }
+// private:
+//     enum {INT, CHAR, DBL, STR} tok; // class or struct can also use this format to define a member!
+//     // class {
+//     // public:
+//     //     void test(){
+//     //         cout << "test" << endl;
+//     //     }
+//     // } test;
+//     union {
+//         char cval;
+//         int ival;
+//         double dval;
+//         std::string sval;
+//     };
+//     void copyUnion(const Token&);
+// };
 
-Token &Token::operator=(int i)
-{
-    if(tok == STR) sval.~string();
-    ival = i;
-    tok = INT;
-    return *this;
-}
+// Token &Token::operator=(int i)
+// {
+//     if(tok == STR) sval.~string();
+//     ival = i;
+//     tok = INT;
+//     return *this;
+// }
 
-Token &Token::operator=(const std::string &s)
+// Token &Token::operator=(const std::string &s)
+// {
+//     if(tok == STR)
+//         sval = s;
+//     else 
+//         new(&sval) string(s);
+//     tok = STR;
+//     return *this;
+// }
+
+// void Token::copyUnion(const Token &t)
+// {
+//     switch (t.tok){
+//         case Token::INT: ival = t.ival; break;
+//         case Token::CHAR: cval = t.cval; break;
+//         case Token::DBL: dval = t.dval; break;
+//         case Token::STR: new(&sval) string(t.sval); break;
+//     }
+// }
+
+// Token &Token::operator=(const Token &t)
+// {
+//     if(tok == STR && t.tok != STR) sval.~string();
+//     if(tok == STR && t.tok == STR)
+//         sval = t.sval;
+//     else
+//         copyUnion(t);
+//     tok = t.tok;
+//     return *this;
+// }
+// Token::Token(Token &&t){
+//     if(tok == STR && t.tok != STR) sval.~string();
+//     if(tok == STR && t.tok == STR)
+//         sval = t.sval;
+//     else
+//         copyUnion(t);
+//     tok = t.tok;
+// }
+
+// Token &Token::operator=(Token &&t)
+// {
+//     if (this == &t)
+//         return *this;
+//     if(tok == STR && t.tok != STR) sval.~string();
+//     if(tok == STR && t.tok == STR)
+//         sval = t.sval;
+//     else
+//         copyUnion(t);
+//     tok = t.tok;
+//     return *this;
+// }
+
+// // //move constructor 
+// // // The answer!!!!!!!!!
+// // //the important is to use the std::move to avoid the `copy` process!!!!!!!
+// // Token& Token::operator=(Token&& t){
+// //     if(this != &t){
+// //         this->~Token();
+// //         copyUnion(t);
+// //         tok = std::move(t.tok);
+// //     }
+// //     return *this;
+// // }
+// // Token::Token(Token &&t){
+// //     copyUnion(t);
+// //     tok = std::move(t.tok);
+// // }
+
+// typedef unsigned int Bit;
+
+// class File {
+//     Bit mode: 2;
+//     Bit modified: 1;
+//     Bit prot_owner: 3;
+//     Bit prot_group: 3;
+//     Bit prot_world: 3;
+// public:
+//     enum modes { READ = 0, WRITE = 02, EXECUTE = 03};
+//     File &open(modes);
+//     void close();
+//     void write();
+//     bool isRead() const;
+//     void setWrite();
+// };
+
+// void File::write()
+// {
+//     modified = 1;
+//     // .....
+// }
+
+// void File::close()
+// {
+//     if (modified)
+//         // save something
+//         return;
+// }
+
+// File &File::open(File::modes m)
+// {
+//     mode |= READ;
+//     if(m & WRITE)
+//         cout << "set the file to write mode" << endl;
+//     return *this;
+// }
+
+// inline bool File::isRead() const {return mode & READ;}
+// inline void File::setWrite() { mode |= WRITE;}
+
+int main()
 {
-    if(tok == STR)
-        sval = s;
-    else 
-        new(&sval) string(s);
-    tok = STR;
-    return *this;
+    volatile int v; // v is a volatile int
+    int *volatile vip; // vip is a volatile pointer to the int;
+    volatile int *ivp; // ivp is a pointer to a volatile int;
+    // vivp is a volatile pointer, it points to a volatile int
+    volatile int *volatile vivp;
+
+    // int *ip = &v; // error, must use a pointer to a volatile type
+    ivp = &v; // right: ivp is a pointer to a volatile int
+    vivp = &v; // right: vivp is a volatile pointer 
 }
