@@ -8,7 +8,7 @@
 #include <unistd.h>     /* Prototypes for many system calls */
 #include <error.h>      /* Declares errno and defines error constants */
 #include <string.h>     /* Commonly used string-handing functions */
-#include  "get_num.h"   /* Declares our functions for handling numeric arguments (getInt(), getLong()) */
+#include "get_num.h"   /* Declares our functions for handling numeric arguments (getInt(), getLong()) */
 #include "error_functions.h" /* Declare our error-handling functions */
 
 typedef enum {FALSE, TRUE} Boolean;
